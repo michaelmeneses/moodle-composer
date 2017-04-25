@@ -23,7 +23,6 @@ class MoodleComposer
         $io->write("------------ INSTALANDO ------------");
         $io->write("AGUARDE ENQUANTO CONCLUÍMOS ALGUMAS CONFIGURAÇÕES");
         self::moveMoodle($event);
-        self::updateMoodledata($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -52,8 +51,7 @@ class MoodleComposer
         $io->write("------------ ATUALIZANDO ------------");
         $io->write("AGUARDE ENQUANTO CONCLUÍMOS ALGUMAS CONFIGURAÇÕES");
         self::moveMoodle($event);
-        self::moveConfig($event);
-        self::updateMoodledata($event);
+        self::copyConfig($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -66,11 +64,13 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $appDir =  getcwd();
-        if (file_exists('moodle/config.php')) {
-            $io->write("Copiando moodle/config.php para ROOT/");
-            exec("cp $appDir/moodle/config.php $appDir");
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installer-dir'];
+        if (file_exists('$installerdir/config.php')) {
+            $io->write("Copiando $installerdir/config.php para ROOT/");
+            exec("cp $appDir/$installerdir/config.php $appDir");
         } else {
-            $io->write("ATENÇÃO!!! moodle/config.php não encontrado");
+            $io->write("ATENÇÃO!!! $installerdir/config.php não encontrado");
         }
     }
 
@@ -83,10 +83,10 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $appDir =  getcwd();
-        $io->write("Copiando moodle/vendor/moodle/moodle para moodle/");
-        exec("cp -r $appDir/moodle/vendor/moodle/moodle/* $appDir/moodle/");
-        $io->write("Removendo moodle/vendor/moodle");
-        exec("rm -r $appDir/moodle/vendor/moodle");
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installer-dir'];
+        $io->write("Copiando vendor/moodle/moodle para $installerdir/");
+        exec("cp -r $appDir/vendor/moodle/moodle/* $appDir/$installerdir/");
     }
 
     /**
@@ -98,27 +98,10 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $appDir =  getcwd();
-        $io->write("Copiando config.php para moodle/");
-        exec("cp $appDir/config.php $appDir/moodle/");
-    }
-
-    /**
-     * updateMoodledata
-     *
-     * @param \Composer\Script\Event $event
-     */
-    public static function updateMoodledata(Event $event)
-    {
-        $io = $event->getIO();
-        $appDir =  getcwd();
-        if (is_dir('moodledata')) {
-            $io->write("Atualizando permissões para moodledata/");
-            chmod('moodledata', 0777);
-        } else {
-            $io->write("Criando moodledata/");
-            mkdir('moodledata');
-            self::updateMoodledata($event);
-        }
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installer-dir'];
+        $io->write("Copiando config.php para $installerdir/");
+        exec("cp $appDir/config.php $appDir/$installerdir/");
     }
 
 }

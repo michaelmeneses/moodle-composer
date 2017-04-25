@@ -21,10 +21,8 @@
     "moodle/moodle": "dev-MOODLE_32_STABLE"
   },
   "extra": {
+    "installer-dir": "public_html",
     "installer-paths": {
-      "moodle": [
-        "moodle/moodle"
-      ],
       "moodle/local/{$name}": [
         "type:moodle-local"
       ],
@@ -32,9 +30,6 @@
         "type:moodle-mod"
       ]
     }
-  },
-  "config": {
-    "vendor-dir": "moodle/vendor"
   },
   "autoload": {
     "psr-4": {

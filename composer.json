@@ -1,0 +1,51 @@
+{
+  "name": "enap/spoc",
+  "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/moodle/moodle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/michaelmeneses/moodle-local_tematica.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
+    }
+  ],
+  "require": {
+    "michaelmeneses/moodle-local_tematica": "~v0.2",
+    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE",
+    "moodle/moodle": "dev-MOODLE_32_STABLE"
+  },
+  "extra": {
+    "installer-paths": {
+      "moodle": [
+        "moodle/moodle"
+      ],
+      "moodle/local/{$name}": [
+        "type:moodle-local"
+      ],
+      "moodle/mod/{$name}": [
+        "type:moodle-mod"
+      ]
+    }
+  },
+  "config": {
+    "vendor-dir": "moodle/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Enap\\": "src"
+    }
+  },
+  "scripts": {
+    "pre-update-cmd": "Enap\\MoodleComposer::preUpdate",
+    "post-update-cmd": "Enap\\MoodleComposer::postUpdate",
+    "post-install-cmd": [
+      "Enap\\MoodleComposer::postInstall"
+    ]
+  }
+}

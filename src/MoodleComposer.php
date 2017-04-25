@@ -116,6 +116,7 @@ class MoodleComposer
             chmod('moodledata', 0777);
         } else {
             $io->write("Criando moodledata/");
+            mkdir('moodledata');
             self::updateMoodledata($event);
         }
     }

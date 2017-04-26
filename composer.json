@@ -1,5 +1,8 @@
 {
-  "name": "enap/spoc",
+  "name": "middag/composer",
+  "description": "Manage Moodle LMS and plugins using Composer at a root directory level (example ROOT/moodle).",
+  "keywords": ["moodle", "composer"],
+  "license": "GPL-3.0",
   "type": "project",
   "repositories": [
     {
@@ -8,39 +11,78 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/michaelmeneses/moodle-local_tematica.git"
-    },
-    {
-      "type": "vcs",
       "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
     }
   ],
   "require": {
-    "michaelmeneses/moodle-local_tematica": "~v0.2",
-    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE",
-    "moodle/moodle": "dev-MOODLE_32_STABLE"
+    "moodle/moodle": "dev-MOODLE_32_STABLE",
+    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE"
   },
   "extra": {
-    "installer-dir": "public_html",
+    "installerdir": "moodle",
     "installer-paths": {
-      "moodle/local/{$name}": [
-        "type:moodle-local"
-      ],
-      "moodle/mod/{$name}": [
-        "type:moodle-mod"
-      ]
+      "moodle/mod/{$name}": ["type:moodle-mod"],
+      "moodle/admin/report/{$name}": ["type:moodle-admin_report"],
+      "moodle/lib/editor/atto/plugins/{$name}": ["type:moodle-atto"],
+      "moodle/admin/tool/{$name}": ["type:moodle-tool"],
+      "moodle/mod/assignment/type/{$name}": ["type:moodle-assignment"],
+      "moodle/mod/assign/submission/{$name}": ["type:moodle-assignsubmission"],
+      "moodle/mod/assign/feedback/{$name}": ["type:moodle-assignfeedback"],
+      "moodle/auth/{$name}": ["type:moodle-auth"],
+      "moodle/availability/condition/{$name}": ["type:moodle-availability"],
+      "moodle/block/{$name}": ["type:moodle-block"],
+      "moodle/mod/book/tool/{$name}": ["type:moodle-booktool"],
+      "moodle/cache/stores/{$name}": ["type:moodle-cachestore"],
+      "moodle/cache/locks/{$name}": ["type:moodle-cachelock"],
+      "moodle/calendar/type/{$name}": ["type:moodle-calendartype"],
+      "moodle/course/format/{$name}": ["type:moodle-format"],
+      "moodle/course/report/{$name}": ["type:moodle-coursereport"],
+      "moodle/mod/data/field/{$name}": ["type:moodle-datafield"],
+      "moodle/mod/data/preset/{$name}": ["type:moodle-datapreset"],
+      "moodle/lib/editor/{$name}": ["type:moodle-editor"],
+      "moodle/enrol/{$name}": ["type:moodle-enrol"],
+      "moodle/filter/{$name}": ["type:moodle-filter"],
+      "moodle/grade/export/{$name}": ["type:moodle-gradeexport"],
+      "moodle/grade/import/{$name}": ["type:moodle-gradeimport"],
+      "moodle/grade/report/{$name}": ["type:moodle-gradereport"],
+      "moodle/grade/grading/form/{$name}": ["type:moodle-gradingform"],
+      "moodle/local/{$name}": ["type:moodle-local"],
+      "moodle/admin/tool/log/store/{$name}": ["type:moodle-logstore"],
+      "moodle/mod/lti/source/{$name}": ["type:moodle-ltisource"],
+      "moodle/mod/lti/service/{$name}": ["type:moodle-ltiservice"],
+      "moodle/message/output/{$name}": ["type:moodle-message"],
+      "moodle/mnet/service/{$name}": ["type:moodle-mnetservice"],
+      "moodle/plagiarism/{$name}": ["type:moodle-plagiarism"],
+      "moodle/portfolio/{$name}": ["type:moodle-portfolio"],
+      "moodle/question/behaviour/{$name}": ["type:moodle-qbehaviour"],
+      "moodle/question/format/{$name}": ["type:moodle-qformat"],
+      "moodle/question/type/{$name}": ["type:moodle-qtype"],
+      "moodle/mod/quiz/accessrule/{$name}": ["type:moodle-quizaccess"],
+      "moodle/mod/quiz/report/{$name}": ["type:moodle-quiz"],
+      "moodle/report/{$name}": ["type:moodle-report"],
+      "moodle/repository/{$name}": ["type:moodle-repository"],
+      "moodle/mod/scorm/report/{$name}": ["type:moodle-scormreport"],
+      "moodle/search/engine/{$name}": ["type:moodle-search"],
+      "moodle/theme/{$name}": ["type:moodle-theme"],
+      "moodle/lib/editor/tinymce/plugins/{$name}": ["type:moodle-tinymce"],
+      "moodle/user/profile/field/{$name}": ["type:moodle-profilefield"],
+      "moodle/webservice/{$name}": ["type:moodle-webservice"],
+      "moodle/mod/workshop/allocation/{$name}": ["type:moodle-workshopallocation"],
+      "moodle/mod/workshop/eval/{$name}": ["type:moodle-workshopeval"],
+      "moodle/mod/workshop/form/{$name}": ["type:moodle-workshopform"]
     }
   },
   "autoload": {
     "psr-4": {
-      "Enap\\": "src"
+      "Middag\\": "src"
     }
   },
   "scripts": {
-    "pre-update-cmd": "Enap\\MoodleComposer::preUpdate",
-    "post-update-cmd": "Enap\\MoodleComposer::postUpdate",
+    "pre-update-cmd": "Middag\\MoodleComposer::preUpdate",
+    "post-update-cmd": "Middag\\MoodleComposer::postUpdate",
     "post-install-cmd": [
-      "Enap\\MoodleComposer::postInstall"
-    ]
+      "Middag\\MoodleComposer::postInstall"
+    ],
+    "pre-install-cmd": "Middag\\MoodleComposer::preInstall"
   }
 }

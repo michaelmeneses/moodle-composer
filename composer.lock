@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "95da11c3da66a96910c8d1048978ac52",
+    "content-hash": "9e0a6840b35bb057723e3cc4b62de6db",
     "packages": [
         {
             "name": "composer/installers",
@@ -148,44 +148,17 @@
             "time": "2017-04-13 01:05:43"
         },
         {
-            "name": "michaelmeneses/moodle-local_tematica",
-            "version": "v0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/michaelmeneses/moodle-local_tematica.git",
-                "reference": "dab45119a30342fc301971ddabfc12e12151190f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/michaelmeneses/moodle-local_tematica/zipball/dab45119a30342fc301971ddabfc12e12151190f",
-                "reference": "dab45119a30342fc301971ddabfc12e12151190f",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "moodle-local",
-            "extra": {
-                "installer-name": "tematica"
-            },
-            "support": {
-                "source": "https://github.com/michaelmeneses/moodle-local_tematica/tree/v0.2",
-                "issues": "https://github.com/michaelmeneses/moodle-local_tematica/issues"
-            },
-            "time": "2017-04-05T14:51:39+00:00"
-        },
-        {
             "name": "moodle/moodle",
             "version": "dev-MOODLE_32_STABLE",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "0e526f9ea668e0b3657611d47e274f7ef0f1b0f1"
+                "reference": "cfe4df185cc61d861db52a29f78b25850ba0d89f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/0e526f9ea668e0b3657611d47e274f7ef0f1b0f1",
-                "reference": "0e526f9ea668e0b3657611d47e274f7ef0f1b0f1",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/cfe4df185cc61d861db52a29f78b25850ba0d89f",
+                "reference": "cfe4df185cc61d861db52a29f78b25850ba0d89f",
                 "shasum": ""
             },
             "require-dev": {
@@ -202,15 +175,15 @@
             "support": {
                 "source": "https://github.com/moodle/moodle/tree/MOODLE_32_STABLE"
             },
-            "time": "2017-04-21 14:47:44"
+            "time": "2017-04-26 06:49:13"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "danmarsden/moodle-mod_attendance": 20,
-        "moodle/moodle": 20
+        "moodle/moodle": 20,
+        "danmarsden/moodle-mod_attendance": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

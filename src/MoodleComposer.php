@@ -48,7 +48,6 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $io->write("------------ PREPARANDO ------------");
-        self::setMaintenance($event, true);
         self::copyConfigToRoot($event);
         self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
@@ -65,7 +64,6 @@ class MoodleComposer
         $io->write("------------ ATUALIZANDO ------------");
         self::moveMoodle($event);
         self::copyConfig($event);
-        self::setMaintenance($event, false);
         self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
     }

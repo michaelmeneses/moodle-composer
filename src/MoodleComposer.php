@@ -35,7 +35,6 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ INSTALANDO ------------");
         self::moveMoodle($event);
-        self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -49,7 +48,6 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ PREPARANDO ------------");
         self::copyConfigToRoot($event);
-        self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -64,7 +62,6 @@ class MoodleComposer
         $io->write("------------ ATUALIZANDO ------------");
         self::moveMoodle($event);
         self::copyConfig($event);
-        self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "74700539039288982e21fa46b8c04b0a",
+    "content-hash": "3b768c2ef8a18cc17a259ba13ba4725b",
     "packages": [
         {
             "name": "composer/installers",
@@ -148,17 +148,17 @@
             "time": "2017-04-13 01:05:43"
         },
         {
-            "name": "michaelmeneses/moodle-local_desempenho",
+            "name": "michaelmeneses/moodle-local_tematica",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/michaelmeneses/moodle-local_desempenho.git",
-                "reference": "97d7c708a8863f4352de31afc6988c0492e81a52"
+                "url": "https://github.com/michaelmeneses/moodle-local_tematica.git",
+                "reference": "02b24837ff7d3ae950147e4466e3764a08062576"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaelmeneses/moodle-local_desempenho/zipball/97d7c708a8863f4352de31afc6988c0492e81a52",
-                "reference": "97d7c708a8863f4352de31afc6988c0492e81a52",
+                "url": "https://api.github.com/repos/michaelmeneses/moodle-local_tematica/zipball/02b24837ff7d3ae950147e4466e3764a08062576",
+                "reference": "02b24837ff7d3ae950147e4466e3764a08062576",
                 "shasum": ""
             },
             "require": {
@@ -166,13 +166,13 @@
             },
             "type": "moodle-local",
             "extra": {
-                "installer-name": "desempenho"
+                "installer-name": "tematica"
             },
             "support": {
-                "source": "https://github.com/michaelmeneses/moodle-local_desempenho/tree/v1.7",
-                "issues": "https://github.com/michaelmeneses/moodle-local_desempenho/issues"
+                "source": "https://github.com/michaelmeneses/moodle-local_tematica/tree/master",
+                "issues": "https://github.com/michaelmeneses/moodle-local_tematica/issues"
             },
-            "time": "2017-04-12 12:03:09"
+            "time": "2017-04-06 13:51:51"
         },
         {
             "name": "moodle/moodle",
@@ -211,7 +211,7 @@
     "stability-flags": {
         "moodle/moodle": 20,
         "danmarsden/moodle-mod_attendance": 20,
-        "michaelmeneses/moodle-local_desempenho": 20
+        "michaelmeneses/moodle-local_tematica": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

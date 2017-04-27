@@ -12,11 +12,16 @@
     {
       "type": "vcs",
       "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/michaelmeneses/moodle-local_desempenho.git"
     }
   ],
   "require": {
     "moodle/moodle": "dev-MOODLE_32_STABLE",
-    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE"
+    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE",
+    "michaelmeneses/moodle-local_desempenho": "dev-master"
   },
   "extra": {
     "installerdir": "moodle",

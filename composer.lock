@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e0a6840b35bb057723e3cc4b62de6db",
+    "content-hash": "3b768c2ef8a18cc17a259ba13ba4725b",
     "packages": [
         {
             "name": "composer/installers",
@@ -148,6 +148,33 @@
             "time": "2017-04-13 01:05:43"
         },
         {
+            "name": "michaelmeneses/moodle-local_tematica",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michaelmeneses/moodle-local_tematica.git",
+                "reference": "02b24837ff7d3ae950147e4466e3764a08062576"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michaelmeneses/moodle-local_tematica/zipball/02b24837ff7d3ae950147e4466e3764a08062576",
+                "reference": "02b24837ff7d3ae950147e4466e3764a08062576",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "moodle-local",
+            "extra": {
+                "installer-name": "tematica"
+            },
+            "support": {
+                "source": "https://github.com/michaelmeneses/moodle-local_tematica/tree/master",
+                "issues": "https://github.com/michaelmeneses/moodle-local_tematica/issues"
+            },
+            "time": "2017-04-06 13:51:51"
+        },
+        {
             "name": "moodle/moodle",
             "version": "dev-MOODLE_32_STABLE",
             "source": {
@@ -183,7 +210,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "moodle/moodle": 20,
-        "danmarsden/moodle-mod_attendance": 20
+        "danmarsden/moodle-mod_attendance": 20,
+        "michaelmeneses/moodle-local_tematica": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -1,5 +1,5 @@
 {
-  "name": "middag/composer",
+  "name": "middag/moodle-composer",
   "description": "Manage Moodle LMS and plugins using Composer at a root directory level (example ROOT/moodle).",
   "keywords": ["moodle", "composer"],
   "license": "GPL-3.0",
@@ -10,18 +10,13 @@
       "url": "https://github.com/moodle/moodle.git"
     },
     {
-      "type": "vcs",
-      "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/michaelmeneses/moodle-local_tematica.git"
+      "type": "composer",
+      "url": "https://micaherne.github.io/moodle-plugin-repo/"
     }
   ],
   "require": {
-    "moodle/moodle": "dev-MOODLE_32_STABLE",
-    "danmarsden/moodle-mod_attendance": "dev-MOODLE_32_STABLE",
-    "michaelmeneses/moodle-local_tematica": "dev-master"
+    "moodle-plugin-db/mod_questionnaire": "*",
+    "moodle/moodle": "dev-MOODLE_33_STABLE"
   },
   "extra": {
     "installerdir": "moodle",
@@ -83,6 +78,7 @@
     }
   },
   "scripts": {
+    "pre-package-update": "Middag\\MoodleComposer::preUpdatePackage",
     "pre-update-cmd": "Middag\\MoodleComposer::preUpdate",
     "post-update-cmd": "Middag\\MoodleComposer::postUpdate",
     "post-install-cmd": [

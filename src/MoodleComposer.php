@@ -2,6 +2,11 @@
 
 namespace Middag;
 
+use Composer\DependencyResolver\Operation\InstallOperation;
+use Composer\DependencyResolver\Operation\UninstallOperation;
+use Composer\DependencyResolver\Operation\UpdateOperation;
+use Composer\Installer\PackageEvent;
+use Composer\Package\PackageInterface;
 use Composer\Script\Event;
 
 /**
@@ -62,6 +67,19 @@ class MoodleComposer
         $io->write("------------ ATUALIZANDO ------------");
         self::moveMoodle($event);
         self::copyConfig($event);
+        $io->write("------------ CONCLUÍDO ------------");
+    }
+
+    /**
+     * preUpdatePackage
+     *
+     * @param \Composer\Script\Event $event
+     */
+    public static function preUpdatePackage(PackageEvent $event)
+    {
+        $io = $event->getIO();
+        $io->write("------------ ATUALIZANDO ------------");
+        self::setGitFileMode($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -173,6 +191,37 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         $io->write("Limpando o cache do Moodle");
         exec("php $appDir/$installerdir/admin/cli/purge_caches.php");
+    }
+
+    /**
+     * setGitFileMode
+     *
+     * @param \Composer\Script\Event $event
+     * @param boolean $status
+     */
+    public static function setGitFileMode(PackageEvent $event)
+    {
+        $io = $event->getIO();
+        $appDir =  getcwd();
+
+        $operation = $event->getOperation();
+        if ($operation instanceof InstallOperation) {
+            $package = $operation->getPackage();
+        }
+        elseif ($operation instanceof UpdateOperation) {
+            $package = $operation->getTargetPackage();
+        }
+        elseif ($operation instanceof UninstallOperation) {
+            $package = $operation->getPackage();
+        }
+        if ($package && $package instanceof PackageInterface) {
+            $installationManager = $event->getComposer()->getInstallationManager();
+            $path = $installationManager->getInstallPath($package);
+            $io->write("Atualizando pacote ", FALSE);
+            $io->write($package->getName());
+            $io->write(">>> git diff | git log -1 | git config core.fileMode false | git checkout -f HEAD | git reset HEAD --hard");
+            $io->write(exec("cd $appDir/$path && git diff && git log -1 && git config core.fileMode false && git checkout -f HEAD && git reset HEAD --hard"));
+        }
     }
 
 }

@@ -10,12 +10,12 @@
       "url": "https://github.com/moodle/moodle.git"
     },
     {
-      "type": "composer",
-      "url": "https://micaherne.github.io/moodle-plugin-repo/"
+      "type": "vcs",
+      "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
     }
   ],
   "require": {
-    "moodle-plugin-db/mod_questionnaire": "*",
+    "danmarsden/moodle-mod_attendance": "dev-MOODLE_33_STABLE",
     "moodle/moodle": "dev-MOODLE_33_STABLE"
   },
   "extra": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b768c2ef8a18cc17a259ba13ba4725b",
+    "content-hash": "8b370f81c564b70e9d52036ad2193d8c",
     "packages": [
         {
             "name": "composer/installers",
@@ -122,16 +122,16 @@
         },
         {
             "name": "danmarsden/moodle-mod_attendance",
-            "version": "dev-MOODLE_32_STABLE",
+            "version": "dev-MOODLE_33_STABLE",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danmarsden/moodle-mod_attendance.git",
-                "reference": "9bf96ab3bceafaf5db3a30a1945aa47c9576a427"
+                "reference": "bd3e960ded6c3b34ed97530b8f045a5bef9ffdf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danmarsden/moodle-mod_attendance/zipball/9bf96ab3bceafaf5db3a30a1945aa47c9576a427",
-                "reference": "9bf96ab3bceafaf5db3a30a1945aa47c9576a427",
+                "url": "https://api.github.com/repos/danmarsden/moodle-mod_attendance/zipball/bd3e960ded6c3b34ed97530b8f045a5bef9ffdf5",
+                "reference": "bd3e960ded6c3b34ed97530b8f045a5bef9ffdf5",
                 "shasum": ""
             },
             "require": {
@@ -142,54 +142,28 @@
                 "installer-name": "attendance"
             },
             "support": {
-                "source": "https://github.com/danmarsden/moodle-mod_attendance/tree/MOODLE_32_STABLE",
+                "source": "https://github.com/danmarsden/moodle-mod_attendance/tree/MOODLE_33_STABLE",
                 "issues": "https://github.com/danmarsden/moodle-mod_attendance/issues"
             },
-            "time": "2017-04-13 01:05:43"
-        },
-        {
-            "name": "michaelmeneses/moodle-local_tematica",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/michaelmeneses/moodle-local_tematica.git",
-                "reference": "02b24837ff7d3ae950147e4466e3764a08062576"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/michaelmeneses/moodle-local_tematica/zipball/02b24837ff7d3ae950147e4466e3764a08062576",
-                "reference": "02b24837ff7d3ae950147e4466e3764a08062576",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "moodle-local",
-            "extra": {
-                "installer-name": "tematica"
-            },
-            "support": {
-                "source": "https://github.com/michaelmeneses/moodle-local_tematica/tree/master",
-                "issues": "https://github.com/michaelmeneses/moodle-local_tematica/issues"
-            },
-            "time": "2017-04-06 13:51:51"
+            "time": "2017-05-17 09:12:10"
         },
         {
             "name": "moodle/moodle",
-            "version": "dev-MOODLE_32_STABLE",
+            "version": "dev-MOODLE_33_STABLE",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "cfe4df185cc61d861db52a29f78b25850ba0d89f"
+                "reference": "b87a580aa3eb23d5f05d7f619fc40a89e0f86fe5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/cfe4df185cc61d861db52a29f78b25850ba0d89f",
-                "reference": "cfe4df185cc61d861db52a29f78b25850ba0d89f",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/b87a580aa3eb23d5f05d7f619fc40a89e0f86fe5",
+                "reference": "b87a580aa3eb23d5f05d7f619fc40a89e0f86fe5",
                 "shasum": ""
             },
             "require-dev": {
-                "moodlehq/behat-extension": "3.32.5",
+                "mikey179/vfsstream": "^1.6",
+                "moodlehq/behat-extension": "3.33.1",
                 "phpunit/dbunit": "1.4.*",
                 "phpunit/phpunit": "5.5.*"
             },
@@ -200,18 +174,17 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/MOODLE_32_STABLE"
+                "source": "https://github.com/moodle/moodle/tree/v3.3.0"
             },
-            "time": "2017-04-26 06:49:13"
+            "time": "2017-05-14 09:46:35"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "moodle/moodle": 20,
         "danmarsden/moodle-mod_attendance": 20,
-        "michaelmeneses/moodle-local_tematica": 20
+        "moodle/moodle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

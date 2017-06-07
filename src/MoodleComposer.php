@@ -40,6 +40,7 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ INSTALANDO ------------");
         self::moveMoodle($event);
+        self::copyConfig($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -53,6 +54,7 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ PREPARANDO ------------");
         self::copyConfigToRoot($event);
+        self::copyVersionToRoot($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -65,8 +67,11 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $io->write("------------ ATUALIZANDO ------------");
-        self::moveMoodle($event);
-        self::copyConfig($event);
+        if (self::isNewMoodle($event)) {
+            self::moveMoodle($event, true);
+            self::copyConfig($event);
+        }
+        self::cleanCache($event);
         $io->write("------------ CONCLUÍDO ------------");
     }
 
@@ -121,6 +126,25 @@ class MoodleComposer
     }
 
     /**
+     * copyVersionToRoot
+     *
+     * @param \Composer\Script\Event $event
+     */
+    public static function copyVersionToRoot(Event $event)
+    {
+        $io = $event->getIO();
+        $appDir =  getcwd();
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installerdir'];
+        if (file_exists("$installerdir/version.php")) {
+            $io->write("Copiando $installerdir/version.php para ROOT/");
+            exec("cp $appDir/$installerdir/version.php $appDir");
+        } else {
+            $io->write("ATENÇÃO!!! $installerdir/version.php não encontrado");
+        }
+    }
+
+    /**
      * moveMoodle
      *
      * @param \Composer\Script\Event $event
@@ -133,7 +157,8 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if ($update) {
             $io->write("Removendo $installerdir/");
-            exec("rm -r $appDir/$installerdir/");
+            exec("rm -rf $appDir/$installerdir/");
+            self::createInstallerDir($event);
         }
         $io->write("Copiando vendor/moodle/moodle para $installerdir/");
         exec("cp -r $appDir/vendor/moodle/moodle/* $appDir/$installerdir/");
@@ -150,7 +175,7 @@ class MoodleComposer
         $appDir =  getcwd();
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
-        if (!file_exists('config.php')) {
+        if (file_exists('config.php')) {
             $io->write("Copiando config.php para $installerdir/");
             exec("cp $appDir/config.php $appDir/$installerdir/");
         }
@@ -219,9 +244,54 @@ class MoodleComposer
             $path = $installationManager->getInstallPath($package);
             $io->write("Atualizando pacote ", FALSE);
             $io->write($package->getName());
-            $io->write(">>> git diff | git log -1 | git config core.fileMode false | git checkout -f HEAD | git reset HEAD --hard");
-            $io->write(exec("cd $appDir/$path && git diff && git log -1 && git config core.fileMode false && git checkout -f HEAD && git reset HEAD --hard"));
+            if (file_exists($path)) {
+                $io->write(">>> git diff | git log -1 | git config core.fileMode false | git checkout -f HEAD | git reset HEAD --hard");
+                $io->write(exec("cd $path && git diff && git log -1 && git config core.fileMode false && git checkout -f HEAD && git reset HEAD --hard"));
+            }
         }
+    }
+
+    /**
+     * isNewMoodle
+     *
+     * @param \Composer\Script\Event $event
+     * @param boolean $status
+     */
+    public static function isNewMoodle(Event $event)
+    {
+        define("MOODLE_INTERNAL", true);
+        define("MATURITY_STABLE", 200);
+
+        $io = $event->getIO();
+        $appDir =  getcwd();
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installerdir'];
+
+        $oldVersion = 0;
+        $newVersion = 0;
+
+        $oldFile = $appDir."/version.php";
+        if (file_exists($oldFile)) {
+            require_once $oldFile;
+            $oldVersion = $version;
+        } else {
+            return false;
+        }
+
+        $newFile = $appDir."/vendor/moodle/moodle/version.php";
+        if (file_exists($newFile)) {
+            require_once $newFile;
+            $newVersion = $version;
+        } else {
+            return false;
+        }
+
+        if ($newVersion > $oldVersion) {
+            $io->write("### NOVA VERSÃO DO MOODLE DETECTADA ###");
+            return true;
+        }
+
+        return false;
     }
 
 }

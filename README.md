@@ -23,3 +23,18 @@ Add require
 
 ### Update
 > composer update
+
+## Moodle upgrade
+
+### Set new version
+**Edit composer.json**
+>"moodle/moodle": "dev-**MOODLE_33_STABLE**"  
+or  
+>"moodle/moodle": "dev-**v3.3.0**"  
+
+### Update  
+**Moodle upgrade**  
+> composer update  
+
+**Reinstall plugins**  
+> composer update  

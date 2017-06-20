@@ -30,7 +30,7 @@
       "moodle/mod/assign/feedback/{$name}": ["type:moodle-assignfeedback"],
       "moodle/auth/{$name}": ["type:moodle-auth"],
       "moodle/availability/condition/{$name}": ["type:moodle-availability"],
-      "moodle/block/{$name}": ["type:moodle-block"],
+      "moodle/blocks/{$name}": ["type:moodle-block"],
       "moodle/mod/book/tool/{$name}": ["type:moodle-booktool"],
       "moodle/cache/stores/{$name}": ["type:moodle-cachestore"],
       "moodle/cache/locks/{$name}": ["type:moodle-cachelock"],

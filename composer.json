@@ -15,7 +15,6 @@
     }
   ],
   "require": {
-    "danmarsden/moodle-mod_attendance": "dev-MOODLE_33_STABLE",
     "moodle/moodle": "dev-MOODLE_33_STABLE"
   },
   "extra": {

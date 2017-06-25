@@ -14,7 +14,20 @@ composer install
 ```
 
 ### Add new moodle plugin
-**Edit composer.json**
+
+#### SATIS
+If the plugin has listed in https://satis.middag.com.br use:
+
+_Edit composer.json_
+
+Add require
+```
+"markn86/moodle-mod_customcert": "dev-MOODLE_33_STABLE"  
+```
+
+#### Another source  
+
+_Edit composer.json_
 
 Add repository
 ```
@@ -24,15 +37,28 @@ Add repository
 }  
 ```
 
-Add require
+Add require (**The plugin should contain composer.json file with type set to "moodle-_type_"**)
 ```
 "markn86/moodle-mod_customcert": "dev-MOODLE_33_STABLE"  
 ```
 
-### Update
+#### Update
 ```
 composer update
 ```
+
+### Remove moodle plugin
+
+#### Remove entry in require
+_Edit composer.json_
+```
+"drachels/moodle-mod_hotquestion": "dev-MOODLE_33_STABLE"  
+```
+#### Update
+```
+composer update
+```
+
 
 ## Moodle upgrade
 
@@ -47,7 +73,7 @@ or
 ```
 
 ### Update  
-**Moodle upgrade**  
+**Moodle upgrade** (ROOT/moodle/ folder is deleted completely)  
 ```
 composer update  
 ```

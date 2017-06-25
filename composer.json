@@ -11,7 +11,7 @@
     },
     {
       "type": "composer",
-      "url": "http://satis.middag.com.br"
+      "url": "https://satis.middag.com.br"
     }
   ],
   "require": {

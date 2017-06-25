@@ -10,8 +10,8 @@
       "url": "https://github.com/moodle/moodle.git"
     },
     {
-      "type": "vcs",
-      "url": "https://github.com/danmarsden/moodle-mod_attendance.git"
+      "type": "composer",
+      "url": "http://satis.middag.com.br"
     }
   ],
   "require": {

@@ -4,28 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0348d26f8598e75f4c9e523d8735ad0a",
-    "content-hash": "407cdc78f76c2ad9380643fc38f07745",
+    "content-hash": "cd13b2d448d27ab1bc0c1621451e94ea",
     "packages": [
         {
             "name": "moodle/moodle",
-            "version": "dev-MOODLE_33_STABLE",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "cccb1a6d21c057903e50c68d10e55789dfe36e56"
+                "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87"
             },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/cccb1a6d21c057903e50c68d10e55789dfe36e56",
-                "reference": "cccb1a6d21c057903e50c68d10e55789dfe36e56",
-                "shasum": ""
+                "type": "tar",
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87-zip-6350c7.tar",
+                "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87",
+                "shasum": "88645972aff7e5af5f1d735b760010a42f3e523f"
             },
             "require-dev": {
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.33.1",
-                "phpunit/dbunit": "1.4.*",
-                "phpunit/phpunit": "5.5.*"
+                "moodlehq/behat-extension": "3.34.1",
+                "phpunit/dbunit": "3.0.*",
+                "phpunit/phpunit": "6.4.*"
             },
             "type": "project",
             "license": [
@@ -34,17 +33,15 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/MOODLE_33_STABLE"
+                "source": "https://github.com/moodle/moodle/tree/v3.4.0"
             },
-            "time": "2017-06-22 14:40:49"
+            "time": "2017-11-11T18:31:19+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "moodle/moodle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

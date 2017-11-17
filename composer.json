@@ -6,16 +6,12 @@
   "type": "project",
   "repositories": [
     {
-      "type": "vcs",
-      "url": "https://github.com/moodle/moodle.git"
-    },
-    {
       "type": "composer",
       "url": "https://satis.middag.com.br"
     }
   ],
   "require": {
-    "moodle/moodle": "dev-MOODLE_33_STABLE"
+    "moodle/moodle": "^3.4"
   },
   "extra": {
     "installerdir": "moodle",

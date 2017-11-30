@@ -25,9 +25,8 @@ class MoodleComposer
     public static function preInstall(Event $event)
     {
         $io = $event->getIO();
-        $io->write("------------ PREPARANDO ------------");
+        $io->write("------------ preInstall ------------");
         self::createInstallerDir($event);
-        $io->write("------------ CONCLUÍDO ------------");
     }
 
     /**
@@ -38,10 +37,9 @@ class MoodleComposer
     public static function postInstall(Event $event)
     {
         $io = $event->getIO();
-        $io->write("------------ INSTALANDO ------------");
+        $io->write("------------ postInstall ------------");
         self::moveMoodle($event);
         self::copyConfig($event);
-        $io->write("------------ CONCLUÍDO ------------");
     }
 
     /**
@@ -52,10 +50,9 @@ class MoodleComposer
     public static function preUpdate(Event $event)
     {
         $io = $event->getIO();
-        $io->write("------------ PREPARANDO ------------");
+        $io->write("------------ preUpdate ------------");
         self::copyConfigToRoot($event);
         self::copyVersionToRoot($event);
-        $io->write("------------ CONCLUÍDO ------------");
     }
 
     /**
@@ -66,13 +63,12 @@ class MoodleComposer
     public static function postUpdate(Event $event)
     {
         $io = $event->getIO();
-        $io->write("------------ ATUALIZANDO ------------");
+        $io->write("------------ postUpdate ------------");
         if (self::isNewMoodle($event)) {
             self::moveMoodle($event, true);
             self::copyConfig($event);
         }
         self::cleanCache($event);
-        $io->write("------------ CONCLUÍDO ------------");
     }
 
     /**
@@ -99,10 +95,10 @@ class MoodleComposer
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
         if (!file_exists($installerdir) && !is_dir($installerdir)) {
-            $io->write("Criando diretório $installerdir/");
+            $io->write("Creating directory $installerdir/");
             mkdir("$installerdir");
         } else {
-            $io->write("NOTA: $installerdir/ já existe");
+            $io->write("Directory $installerdir/ already exists");
         }
     }
 
@@ -118,10 +114,12 @@ class MoodleComposer
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
         if (file_exists("$installerdir/config.php")) {
-            $io->write("Copiando $installerdir/config.php para ROOT/");
-            exec("cp $appDir/$installerdir/config.php $appDir");
+            $io->write("Copying $installerdir/config.php to ROOT/");
+            if (!copy("$appDir/$installerdir/config.php", $appDir)) {
+                $io->write("FAILURE");
+            }
         } else {
-            $io->write("ATENÇÃO!!! $installerdir/config.php não encontrado");
+            $io->write("File $installerdir/config.php not found!");
         }
     }
 
@@ -137,10 +135,12 @@ class MoodleComposer
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
         if (file_exists("$installerdir/version.php")) {
-            $io->write("Copiando $installerdir/version.php para ROOT/");
-            exec("cp $appDir/$installerdir/version.php $appDir");
+            $io->write("Copying $installerdir/version.php to ROOT/");
+            if (!copy("$appDir/$installerdir/version.php", $appDir)) {
+                $io->write("FAILURE");
+            }
         } else {
-            $io->write("ATENÇÃO!!! $installerdir/version.php não encontrado");
+            $io->write("File $installerdir/version.php not found!");
         }
     }
 
@@ -177,7 +177,9 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if (file_exists('config.php')) {
             $io->write("Copiando config.php para $installerdir/");
-            exec("cp $appDir/config.php $appDir/$installerdir/");
+            if (!copy("$appDir/config.php", "$appDir/$installerdir/")) {
+                $io->write("FAILURE");
+            }
         }
     }
 
@@ -287,7 +289,7 @@ class MoodleComposer
         }
 
         if ($newVersion > $oldVersion) {
-            $io->write("### NOVA VERSÃO DO MOODLE DETECTADA ###");
+            $io->write("### NEW MOODLE DETECTED VERSION ###");
             return true;
         }
 

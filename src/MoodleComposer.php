@@ -26,7 +26,6 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $io->write("------------ preInstall ------------");
-        self::createInstallerDir($event);
     }
 
     /**
@@ -65,7 +64,7 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ postUpdate ------------");
         if (self::isNewMoodle($event)) {
-            self::moveMoodle($event, true);
+            self::moveMoodle($event);
             self::copyConfig($event);
         }
         self::cleanCache($event);
@@ -149,19 +148,20 @@ class MoodleComposer
      *
      * @param \Composer\Script\Event $event
      */
-    public static function moveMoodle(Event $event, $update = false)
+    public static function moveMoodle(Event $event)
     {
         $io = $event->getIO();
         $appDir =  getcwd();
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
-        if ($update) {
-            $io->write("Removendo $installerdir/");
-            exec("rm -rf $appDir/$installerdir/");
-            self::createInstallerDir($event);
+        if (is_dir($installerdir)) {
+            $io->write("Removing $installerdir/");
+            rmdir($installerdir);
         }
-        $io->write("Copiando vendor/moodle/moodle para $installerdir/");
-        exec("cp -r $appDir/vendor/moodle/moodle/* $appDir/$installerdir/");
+        $io->write("Copying vendor/moodle/moodle to $installerdir/");
+        if(!rename($appDir."/vendor/moodle/moodle", $appDir.DIRECTORY_SEPARATOR.$installerdir)) {
+            $io->write("FAILURE");
+        }
     }
 
     /**
@@ -176,7 +176,7 @@ class MoodleComposer
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
         if (file_exists('config.php')) {
-            $io->write("Copiando config.php para $installerdir/");
+            $io->write("Copying config.php to $installerdir/");
             if (!copy("$appDir/config.php", "$appDir/$installerdir/")) {
                 $io->write("FAILURE");
             }
@@ -196,10 +196,10 @@ class MoodleComposer
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
         if ($status) {
-            $io->write("Habilitando modo de manutenção");
+            $io->write("Enabling Maintenance Mode");
             exec("php $appDir/$installerdir/admin/cli/maintenance.php --enable");
         } else {
-            $io->write("Desabilitando modo de manutenção");
+            $io->write("Disabling Maintenance Mode");
             exec("php $appDir/$installerdir/admin/cli/maintenance.php --disable");
         }
     }
@@ -216,7 +216,7 @@ class MoodleComposer
         $appDir =  getcwd();
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
-        $io->write("Limpando o cache do Moodle");
+        $io->write("Clearing the Moodle cache");
         exec("php $appDir/$installerdir/admin/cli/purge_caches.php");
     }
 
@@ -244,7 +244,7 @@ class MoodleComposer
         if ($package && $package instanceof PackageInterface) {
             $installationManager = $event->getComposer()->getInstallationManager();
             $path = $installationManager->getInstallPath($package);
-            $io->write("Atualizando pacote ", FALSE);
+            $io->write("Updating package ", FALSE);
             $io->write($package->getName());
             if (file_exists($path)) {
                 $io->write(">>> git diff | git log -1 | git config core.fileMode false | git checkout -f HEAD | git reset HEAD --hard");

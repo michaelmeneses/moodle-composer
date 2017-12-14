@@ -114,7 +114,7 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if (file_exists("$installerdir/config.php")) {
             $io->write("Copying $installerdir/config.php to ROOT/");
-            if (!copy("$appDir/$installerdir/config.php", $appDir)) {
+            if (!copy("$appDir/$installerdir/config.php", "$appDir/config.php")) {
                 $io->write("FAILURE");
             }
         } else {
@@ -135,7 +135,7 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if (file_exists("$installerdir/version.php")) {
             $io->write("Copying $installerdir/version.php to ROOT/");
-            if (!copy("$appDir/$installerdir/version.php", $appDir)) {
+            if (!copy("$appDir/$installerdir/version.php", "$appDir/version.php")) {
                 $io->write("FAILURE");
             }
         } else {
@@ -156,7 +156,7 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if (is_dir($installerdir)) {
             $io->write("Removing $installerdir/");
-            rmdir($installerdir);
+            self::deleteRecursive($installerdir);
         }
         $io->write("Copying vendor/moodle/moodle to $installerdir/");
         if(!rename($appDir."/vendor/moodle/moodle", $appDir.DIRECTORY_SEPARATOR.$installerdir)) {
@@ -177,7 +177,7 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         if (file_exists('config.php')) {
             $io->write("Copying config.php to $installerdir/");
-            if (!copy("$appDir/config.php", "$appDir/$installerdir/")) {
+            if (!copy("$appDir/config.php", "$appDir/$installerdir/config.php")) {
                 $io->write("FAILURE");
             }
         }
@@ -294,6 +294,27 @@ class MoodleComposer
         }
 
         return false;
+    }
+
+    /**
+     * deleteRecursive
+     */
+    public static function deleteRecursive($path)
+    {
+        if (is_file($path) || is_link($path)) {
+            return unlink($path);
+        }
+        $success = true;
+        $dir = dir($path);
+        while (($entry = $dir->read()) !== false) {
+            if ($entry == '.' || $entry == '..') {
+                continue;
+            }
+            $entry_path = $path . '/' . $entry;
+            $success = static::deleteRecursive($entry_path) && $success;
+        }
+        $dir->close();
+        return rmdir($path) && $success;
     }
 
 }

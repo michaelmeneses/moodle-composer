@@ -70,6 +70,7 @@ class MoodleComposer
         if (self::isNewMoodle($event)) {
             self::moveMoodle($event);
             self::copyConfig($event);
+            $io->write("DANGER! Run 'composer update' to reinstall plugins.");
         }
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];

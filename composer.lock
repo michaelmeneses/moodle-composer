@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd13b2d448d27ab1bc0c1621451e94ea",
+    "content-hash": "4f733f27cfab2085a8e79174afe49f6c",
     "packages": [
         {
             "name": "moodle/moodle",
@@ -15,10 +15,10 @@
                 "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87"
             },
             "dist": {
-                "type": "tar",
-                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87-zip-6350c7.tar",
+                "type": "zip",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87",
                 "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87",
-                "shasum": "88645972aff7e5af5f1d735b760010a42f3e523f"
+                "shasum": ""
             },
             "require-dev": {
                 "mikey179/vfsstream": "^1.6",
@@ -27,14 +27,12 @@
                 "phpunit/phpunit": "6.4.*"
             },
             "type": "project",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0"
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.4.0"
-            },
             "time": "2017-11-11T18:31:19+00:00"
         }
     ],

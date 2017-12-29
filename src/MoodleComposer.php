@@ -103,7 +103,6 @@ class MoodleComposer
             $path = $installationManager->getInstallPath($package);
             $io->write("Updating package ", FALSE);
             $io->write($package->getName());
-            self::setGitFileMode($event, $path);
         }
     }
 
@@ -203,21 +202,6 @@ class MoodleComposer
         $installerdir = $extra['installerdir'];
         $io->write("Clearing the Moodle cache");
         exec("php $appDir/$installerdir/admin/cli/purge_caches.php");
-    }
-
-    /**
-     * setGitFileMode
-     *
-     * @param \Composer\Script\Event $event
-     * @param boolean                $status
-     */
-    public static function setGitFileMode(PackageEvent $event, $path)
-    {
-        $io = $event->getIO();
-
-        if (file_exists($path)) {
-            $io->write(exec("cd $path && git diff && git log -1 && git config core.fileMode false && git checkout -f HEAD && git reset HEAD --hard"));
-        }
     }
 
     /**

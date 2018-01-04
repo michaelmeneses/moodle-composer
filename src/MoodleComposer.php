@@ -8,6 +8,7 @@ use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\Installer\PackageEvent;
 use Composer\Package\PackageInterface;
 use Composer\Script\Event;
+use Composer\Util\Filesystem;
 
 /**
  * Provides static functions for composer script events.
@@ -68,6 +69,7 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ postUpdate ------------");
         if (self::isNewMoodle($event)) {
+            self::removeMoodle($event);
             self::moveMoodle($event);
             self::copyConfig($event);
             $io->write("DANGER! Run 'composer update' to reinstall plugins.");
@@ -138,13 +140,24 @@ class MoodleComposer
         $appDir = getcwd();
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
+        $filesystem = new Filesystem();
+        $io->write("Copying vendor/moodle/moodle to $installerdir/");
+        $filesystem->copyThenRemove($appDir . "/vendor/moodle/moodle", $appDir . DIRECTORY_SEPARATOR . $installerdir);
+    }
+
+    /**
+     * removeMoodle
+     *
+     * @param \Composer\Script\Event $event
+     */
+    public static function removeMoodle(Event $event)
+    {
+        $io = $event->getIO();
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        $installerdir = $extra['installerdir'];
         if (is_dir($installerdir)) {
             $io->write("Removing $installerdir/");
             self::deleteRecursive($installerdir);
-        }
-        $io->write("Copying vendor/moodle/moodle to $installerdir/");
-        if (!rename($appDir . "/vendor/moodle/moodle", $appDir . DIRECTORY_SEPARATOR . $installerdir)) {
-            $io->write("FAILURE");
         }
     }
 

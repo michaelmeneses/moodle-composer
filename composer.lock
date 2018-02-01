@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f733f27cfab2085a8e79174afe49f6c",
+    "content-hash": "1d231b1ff56876f6de4b3b1cdc790fee",
     "packages": [
         {
             "name": "moodle/moodle",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87"
+                "reference": "c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87",
-                "reference": "665c3ac59c35b7387a4fc70b8ac6600ce9ffeb87",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f",
+                "reference": "c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f",
                 "shasum": ""
             },
             "require-dev": {
@@ -33,7 +33,7 @@
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "time": "2017-11-11T18:31:19+00:00"
+            "time": "2018-01-12T19:35:46+00:00"
         }
     ],
     "packages-dev": [],

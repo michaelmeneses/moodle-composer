@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "moodle/moodle": "^3.4.0"
+    "moodle/moodle": "3.4.1"
   },
   "extra": {
     "installerdir": "moodle",

@@ -3,7 +3,13 @@
   "description": "Manage Moodle LMS and plugins using Composer at a root directory level (example ROOT/moodle).",
   "keywords": ["moodle", "composer"],
   "license": "GPL-3.0",
-  "type": "project",
+  "type": "composer-plugin",
+  "authors": [
+    {
+      "name": "Michael Meneses",
+      "email": "michael@middag.com.br"
+    }
+  ],
   "repositories": [
     {
       "type": "composer",
@@ -74,11 +80,11 @@
   },
   "scripts": {
     "pre-package-update": "Middag\\MoodleComposer::preUpdatePackage",
+    "post-package-update": "Middag\\MoodleComposer::postPackage",
+    "post-package-install": "Middag\\MoodleComposer::postPackage",
     "pre-update-cmd": "Middag\\MoodleComposer::preUpdate",
     "post-update-cmd": "Middag\\MoodleComposer::postUpdate",
-    "post-install-cmd": [
-      "Middag\\MoodleComposer::postInstall"
-    ],
+    "post-install-cmd": "Middag\\MoodleComposer::postInstall",
     "pre-install-cmd": "Middag\\MoodleComposer::preInstall"
   }
 }

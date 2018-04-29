@@ -29,6 +29,7 @@ class MoodleComposer
         $io->write("------------ preInstall ------------");
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
+        // TODO required that folder no exists
         if (is_dir($installerdir) && file_exists($installerdir . "/version.php")) {
             throw new \Exception("Moodle is already installed in the folder: $installerdir.");
         }
@@ -43,6 +44,7 @@ class MoodleComposer
     {
         $io = $event->getIO();
         $io->write("------------ postInstall ------------");
+        // TODO resolve need move or copy Moodle
         self::moveMoodle($event);
         self::copyConfig($event);
     }
@@ -72,7 +74,7 @@ class MoodleComposer
             self::removeMoodle($event);
             self::moveMoodle($event);
             self::copyConfig($event);
-            $io->write("DANGER! Run 'composer update' to reinstall plugins.");
+            $io->write("<warning>DANGER! Run 'composer update' to reinstall plugins.</warning>");
         }
         $extra = $event->getComposer()->getPackage()->getExtra();
         $installerdir = $extra['installerdir'];
@@ -91,8 +93,44 @@ class MoodleComposer
         $io = $event->getIO();
         $io->write("------------ preUpdatePackage ------------");
 
-        $appDir = getcwd();
+        $package = self::getPackage($event);
+        if (isset($package) && $package instanceof PackageInterface) {
+            $io->write("Updating package ", FALSE);
+            $io->write($package->getName());
+        }
+    }
+
+    /**
+     * postPackage
+     *
+     * @param \Composer\Script\Event $event
+     */
+    public static function postPackage(PackageEvent $event)
+    {
+        $io = $event->getIO();
+        $io->write("------------ postPackage ------------");
+
+        $package = self::getPackage($event);
+        if (isset($package) && $package instanceof PackageInterface) {
+            $installationManager = $event->getComposer()->getInstallationManager();
+            $path = $installationManager->getInstallPath($package);
+            if (file_exists("$path/.gitmodules")) {
+                $packageName = $package->getName();
+                $io->write("This package $packageName own Submodules Git and they will install now");
+                exec("cd $path && git submodule update --init");
+            }
+        }
+    }
+
+    /**
+     * getPackage
+     *
+     * @param \Composer\Script\Event $event
+     */
+    public static function getPackage(PackageEvent $event)
+    {
         $operation = $event->getOperation();
+
         if ($operation instanceof InstallOperation) {
             $package = $operation->getPackage();
         } else if ($operation instanceof UpdateOperation) {
@@ -100,12 +138,8 @@ class MoodleComposer
         } else if ($operation instanceof UninstallOperation) {
             $package = $operation->getPackage();
         }
-        if (isset($package) && $package instanceof PackageInterface) {
-            $installationManager = $event->getComposer()->getInstallationManager();
-            $path = $installationManager->getInstallPath($package);
-            $io->write("Updating package ", FALSE);
-            $io->write($package->getName());
-        }
+
+        return $package;
     }
 
     /**
@@ -184,7 +218,7 @@ class MoodleComposer
      * setMaintenance
      *
      * @param \Composer\Script\Event $event
-     * @param boolean                $status
+     * @param boolean $status
      */
     public static function setMaintenance(Event $event, $status = false)
     {
@@ -205,7 +239,7 @@ class MoodleComposer
      * cleanCache
      *
      * @param \Composer\Script\Event $event
-     * @param boolean                $status
+     * @param boolean $status
      */
     public static function cleanCache(Event $event)
     {
@@ -221,7 +255,7 @@ class MoodleComposer
      * isNewMoodle
      *
      * @param \Composer\Script\Event $event
-     * @param boolean                $status
+     * @param boolean $status
      */
     public static function isNewMoodle(Event $event)
     {

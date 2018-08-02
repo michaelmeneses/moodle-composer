@@ -1,5 +1,5 @@
 {
-  "name": "middag/moodle-composer",
+  "name": "michaelmeneses/moodle-composer",
   "description": "Manage Moodle LMS and plugins using Composer at a root directory level (example ROOT/moodle).",
   "keywords": ["moodle", "composer"],
   "license": "GPL-3.0",

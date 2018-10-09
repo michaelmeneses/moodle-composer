@@ -4,36 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d231b1ff56876f6de4b3b1cdc790fee",
+    "hash": "a30c3b5912f7bcccd851e3363ded50df",
+    "content-hash": "c6cfc35d56c2c0cc334ea785f912f613",
     "packages": [
         {
             "name": "moodle/moodle",
-            "version": "v3.4.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f"
+                "reference": "bd27666c42be0c873c7d98f0e81cb226d2ca6dbd"
             },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f",
-                "reference": "c9236c6860d763916d8c7a0f8c5c63f37a0e3a0f",
-                "shasum": ""
+                "type": "tar",
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-bd27666c42be0c873c7d98f0e81cb226d2ca6dbd-zip-43de60.tar",
+                "reference": "bd27666c42be0c873c7d98f0e81cb226d2ca6dbd",
+                "shasum": "766b9b31fb8ccc0cd486c3fd2c732ddd4428de7e"
             },
             "require-dev": {
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.34.1",
+                "moodlehq/behat-extension": "3.35.1",
                 "phpunit/dbunit": "3.0.*",
-                "phpunit/phpunit": "6.4.*"
+                "phpunit/phpunit": "6.5.*"
             },
             "type": "project",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-or-later"
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "time": "2018-01-12T19:35:46+00:00"
+            "support": {
+                "source": "https://github.com/moodle/moodle/tree/v3.5.2"
+            },
+            "time": "2018-09-08 14:49:53"
         }
     ],
     "packages-dev": [],

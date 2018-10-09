@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "moodle/moodle": "3.4.1"
+    "moodle/moodle": "3.5.2"
   },
   "extra": {
     "installerdir": "moodle",
@@ -86,5 +86,11 @@
     "post-update-cmd": "Middag\\MoodleComposer::postUpdate",
     "post-install-cmd": "Middag\\MoodleComposer::postInstall",
     "pre-install-cmd": "Middag\\MoodleComposer::preInstall"
+  },
+  "config": {
+    "preferred-install": {
+      "moodle/moodle": "dist"
+    },
+    "discard-changes": true
   }
 }

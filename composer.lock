@@ -4,22 +4,143 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a30c3b5912f7bcccd851e3363ded50df",
-    "content-hash": "c6cfc35d56c2c0cc334ea785f912f613",
+    "hash": "4f7fde6377eaa5c7200a4d92d9fa1f3a",
+    "content-hash": "f0e0b49700f1d54084d89092ef76c2a8",
     "packages": [
         {
+            "name": "composer/installers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "b20f7b252cd6765ee68e66f8b3093a230ad97608"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/b20f7b252cd6765ee68e66f8b3093a230ad97608",
+                "reference": "b20f7b252cd6765ee68e66f8b3093a230ad97608",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "Lan Management System",
+                "MODX Evo",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "Whmcs",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "eZ Platform",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "majima",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "modx",
+                "moodle",
+                "osclass",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "pxcms",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2018-10-10 11:17:18"
+        },
+        {
             "name": "moodle/moodle",
-            "version": "v3.5.2",
+            "version": "v3.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "bd27666c42be0c873c7d98f0e81cb226d2ca6dbd"
+                "reference": "789dcd6975004dfaa2d4d3086267fb29cba84da8"
             },
             "dist": {
-                "type": "tar",
-                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-bd27666c42be0c873c7d98f0e81cb226d2ca6dbd-zip-43de60.tar",
-                "reference": "bd27666c42be0c873c7d98f0e81cb226d2ca6dbd",
-                "shasum": "766b9b31fb8ccc0cd486c3fd2c732ddd4428de7e"
+                "type": "zip",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/789dcd6975004dfaa2d4d3086267fb29cba84da8",
+                "reference": "789dcd6975004dfaa2d4d3086267fb29cba84da8",
+                "shasum": ""
             },
             "require-dev": {
                 "mikey179/vfsstream": "^1.6",
@@ -28,21 +149,21 @@
                 "phpunit/phpunit": "6.5.*"
             },
             "type": "project",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.5.2"
-            },
-            "time": "2018-09-08 14:49:53"
+            "time": "2018-11-10 19:36:27"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "composer/installers": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

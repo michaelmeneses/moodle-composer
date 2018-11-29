@@ -17,7 +17,8 @@
     }
   ],
   "require": {
-    "moodle/moodle": "3.5.2"
+    "composer/installers": "dev-master",
+    "moodle/moodle": "3.5.3"
   },
   "extra": {
     "installerdir": "moodle",
@@ -37,6 +38,7 @@
       "moodle/cache/locks/{$name}": ["type:moodle-cachelock"],
       "moodle/calendar/type/{$name}": ["type:moodle-calendartype"],
       "moodle/course/format/{$name}": ["type:moodle-format"],
+      "moodle/mod/customcert/element/{$name}": ["type:moodle-customcertelement"],
       "moodle/course/report/{$name}": ["type:moodle-coursereport"],
       "moodle/mod/data/field/{$name}": ["type:moodle-datafield"],
       "moodle/mod/data/preset/{$name}": ["type:moodle-datapreset"],

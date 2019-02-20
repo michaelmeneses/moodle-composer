@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "4f7fde6377eaa5c7200a4d92d9fa1f3a",
-    "content-hash": "f0e0b49700f1d54084d89092ef76c2a8",
+    "content-hash": "8980446e3aa91b2a2ce64355e7590e4a",
     "packages": [
         {
             "name": "composer/installers",
@@ -13,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "b20f7b252cd6765ee68e66f8b3093a230ad97608"
+                "reference": "5d51c2c61a0a66e312057bb14c74b8a93c9a528f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/b20f7b252cd6765ee68e66f8b3093a230ad97608",
-                "reference": "b20f7b252cd6765ee68e66f8b3093a230ad97608",
+                "url": "https://api.github.com/repos/composer/installers/zipball/5d51c2c61a0a66e312057bb14c74b8a93c9a528f",
+                "reference": "5d51c2c61a0a66e312057bb14c74b8a93c9a528f",
                 "shasum": ""
             },
             "require": {
@@ -126,25 +125,25 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2018-10-10 11:17:18"
+            "time": "2019-01-25T07:48:56+00:00"
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.5.3",
+            "version": "v3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "789dcd6975004dfaa2d4d3086267fb29cba84da8"
+                "reference": "68b59f336ba2d1b3340dd654f2084b7df46117d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/789dcd6975004dfaa2d4d3086267fb29cba84da8",
-                "reference": "789dcd6975004dfaa2d4d3086267fb29cba84da8",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/68b59f336ba2d1b3340dd654f2084b7df46117d6",
+                "reference": "68b59f336ba2d1b3340dd654f2084b7df46117d6",
                 "shasum": ""
             },
             "require-dev": {
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.35.1",
+                "moodlehq/behat-extension": "3.36.0",
                 "phpunit/dbunit": "3.0.*",
                 "phpunit/phpunit": "6.5.*"
             },
@@ -155,7 +154,7 @@
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "time": "2018-11-10 19:36:27"
+            "time": "2019-01-12T12:26:00+00:00"
         }
     ],
     "packages-dev": [],

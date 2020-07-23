@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2523ba610e98aff9ae0343ef0053b78",
+    "content-hash": "43f52ab4805f925402113dc43530620d",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,24 +12,27 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "4aa453ad54f76c4db02b6ad3574e17795c51fb23"
+                "reference": "c462a693445b8f6913e95c2ea774d60cf42f64ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/4aa453ad54f76c4db02b6ad3574e17795c51fb23",
-                "reference": "4aa453ad54f76c4db02b6ad3574e17795c51fb23",
+                "url": "https://api.github.com/repos/composer/installers/zipball/c462a693445b8f6913e95c2ea774d60cf42f64ec",
+                "reference": "c462a693445b8f6913e95c2ea774d60cf42f64ec",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0"
+                "composer-plugin-api": "^1.0 || ^2.0"
             },
             "replace": {
                 "roundcube/plugin-installer": "*",
                 "shama/baton": "*"
             },
             "require-dev": {
-                "composer/composer": "1.0.*@dev",
-                "phpunit/phpunit": "^4.8.36"
+                "composer/composer": "1.6.* || 2.0.*@dev",
+                "composer/semver": "^1 || ^3",
+                "phpunit/phpunit": "^4.8.36",
+                "sebastian/comparator": "^1.2.4",
+                "symfony/process": "^2.3"
             },
             "type": "composer-plugin",
             "extra": {
@@ -65,6 +68,7 @@
                 "Kanboard",
                 "Lan Management System",
                 "MODX Evo",
+                "MantisBT",
                 "Mautic",
                 "Maya",
                 "OXID",
@@ -96,6 +100,7 @@
                 "installer",
                 "itop",
                 "joomla",
+                "known",
                 "kohana",
                 "laravel",
                 "lavalite",
@@ -118,6 +123,7 @@
                 "shopware",
                 "silverstripe",
                 "sydes",
+                "sylius",
                 "symfony",
                 "typo3",
                 "wordpress",
@@ -125,25 +131,26 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2019-05-15T06:46:42+00:00"
+            "time": "2020-06-05T09:23:41+00:00"
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.7.0",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "89457b26d192c06325bb6782b85d1025dafbefe9"
+                "reference": "500c131eb49771e36f68d151dfa37fef5a9bc2df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/89457b26d192c06325bb6782b85d1025dafbefe9",
-                "reference": "89457b26d192c06325bb6782b85d1025dafbefe9",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/500c131eb49771e36f68d151dfa37fef5a9bc2df",
+                "reference": "500c131eb49771e36f68d151dfa37fef5a9bc2df",
                 "shasum": ""
             },
             "require-dev": {
+                "instaclick/php-webdriver": "dev-local as 1.x-dev",
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.37.0",
+                "moodlehq/behat-extension": "3.39.3",
                 "phpunit/dbunit": "4.0.*",
                 "phpunit/phpunit": "7.5.*"
             },
@@ -154,7 +161,7 @@
             ],
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
-            "time": "2019-05-19T09:18:34+00:00"
+            "time": "2020-06-13T18:04:49+00:00"
         }
     ],
     "packages-dev": [],

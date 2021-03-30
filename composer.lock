@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "392d198a65ee207303b28d4014c02307",
+    "content-hash": "e022f830ae2f4a36684e6b549c8454cc",
     "packages": [
         {
             "name": "composer/installers",
@@ -156,22 +156,21 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.9.0",
+            "version": "v3.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "500c131eb49771e36f68d151dfa37fef5a9bc2df"
+                "reference": "02a2e649e92d570c7fa735bf05f69b588036f761"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/500c131eb49771e36f68d151dfa37fef5a9bc2df",
-                "reference": "500c131eb49771e36f68d151dfa37fef5a9bc2df",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/02a2e649e92d570c7fa735bf05f69b588036f761",
+                "reference": "02a2e649e92d570c7fa735bf05f69b588036f761",
                 "shasum": ""
             },
             "require-dev": {
-                "instaclick/php-webdriver": "dev-local as 1.x-dev",
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.39.3",
+                "moodlehq/behat-extension": "3.39.6",
                 "phpunit/dbunit": "4.0.*",
                 "phpunit/phpunit": "7.5.*"
             },
@@ -183,7 +182,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.9.0"
+                "source": "https://github.com/moodle/moodle/tree/v3.9.5"
             },
             "funding": [
                 {
@@ -194,7 +193,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-06-13T18:04:49+00:00"
+            "time": "2021-03-06T17:03:54+00:00"
         }
     ],
     "packages-dev": [],

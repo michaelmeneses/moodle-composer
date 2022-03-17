@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6ef8463a21a78a8def07d2c1f201322",
+    "content-hash": "e2aeac48385fbecc5449f03ad69abfb6",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.10.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d"
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d",
-                "reference": "1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
                 "shasum": ""
             },
             "require": {
@@ -111,10 +111,12 @@
                 "majima",
                 "mako",
                 "mediawiki",
+                "miaoxing",
                 "modulework",
                 "modx",
                 "moodle",
                 "osclass",
+                "pantheon",
                 "phpbb",
                 "piwik",
                 "ppi",
@@ -128,6 +130,7 @@
                 "sydes",
                 "sylius",
                 "symfony",
+                "tastyigniter",
                 "typo3",
                 "wordpress",
                 "yawik",
@@ -136,7 +139,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.10.0"
+                "source": "https://github.com/composer/installers/tree/v1.12.0"
             },
             "funding": [
                 {
@@ -152,27 +155,62 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-14T11:07:16+00:00"
+            "time": "2021-09-13T08:19:44+00:00"
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.9.11",
+            "version": "v3.9.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "b02dd253b8e111cfa2c22883bb1d831c6f1f5f63"
+                "reference": "4e2c4bfaedc4057c3b22976757f9a2c845ba3124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/b02dd253b8e111cfa2c22883bb1d831c6f1f5f63",
-                "reference": "b02dd253b8e111cfa2c22883bb1d831c6f1f5f63",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/4e2c4bfaedc4057c3b22976757f9a2c845ba3124",
+                "reference": "4e2c4bfaedc4057c3b22976757f9a2c845ba3124",
                 "shasum": ""
             },
+            "require": {
+                "ext-ctype": "*",
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "ext-fileinfo": "*",
+                "ext-gd": "*",
+                "ext-hash": "*",
+                "ext-iconv": "*",
+                "ext-intl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-pcre": "*",
+                "ext-simplexml": "*",
+                "ext-spl": "*",
+                "ext-xml": "*",
+                "ext-xmlreader": "*",
+                "ext-zip": "*",
+                "ext-zlib": "*",
+                "php": ">=7.2.0 <8.0"
+            },
             "require-dev": {
+                "behat/behat": "3.10.*",
+                "behat/mink": "~1.8",
+                "behat/mink-extension": "~2.3",
+                "behat/mink-goutte-driver": "~1.2",
                 "mikey179/vfsstream": "^1.6",
-                "moodlehq/behat-extension": "3.39.6",
+                "oleg-andreyev/mink-phpwebdriver": "^1.0",
                 "phpunit/dbunit": "4.0.*",
-                "phpunit/phpunit": "7.5.*"
+                "phpunit/phpunit": "7.5.*",
+                "symfony/process": "^4.0 || ^5.0"
+            },
+            "suggest": {
+                "ext-mysqli": "Needed when Moodle uses MySQL or MariaDB database.",
+                "ext-oci8": "Needed when Moodle uses Oracle database.",
+                "ext-pgsql": "Needed when Moodle uses PostgreSQL database.",
+                "ext-soap": "Enabling SOAP PHP extension is useful for web services and some plugins.",
+                "ext-sqlsrv": "Needed when Moodle uses MS SQL Server database.",
+                "ext-tokenizer": "Enabling Tokenizer PHP extension is recommended, it improves Moodle Networking functionality.",
+                "ext-xmlrpc": "Enabling XMLRPC PHP extension is useful for web services and Moodle networking."
             },
             "type": "project",
             "notification-url": "https://packagist.org/downloads/",
@@ -182,7 +220,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.9.11"
+                "source": "https://github.com/moodle/moodle/tree/v3.9.13"
             },
             "funding": [
                 {
@@ -193,7 +231,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-11-06T09:34:10+00:00"
+            "time": "2022-03-12T04:39:22+00:00"
         }
     ],
     "packages-dev": [],

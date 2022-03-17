@@ -18,7 +18,7 @@
   ],
   "require": {
     "composer/installers": "~1.0",
-    "moodle/moodle": "3.9.11"
+    "moodle/moodle": "3.9.*"
   },
   "extra": {
     "installerdir": "moodle",
@@ -93,6 +93,9 @@
     "preferred-install": {
       "moodle/moodle": "dist"
     },
-    "discard-changes": true
+    "discard-changes": true,
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2aeac48385fbecc5449f03ad69abfb6",
+    "content-hash": "691ce9717179c34ae3ad083360555cde",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.9.13",
+            "version": "v3.10.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "4e2c4bfaedc4057c3b22976757f9a2c845ba3124"
+                "reference": "4495c3351ccecb954a183e05b7220572fc591ce9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/4e2c4bfaedc4057c3b22976757f9a2c845ba3124",
-                "reference": "4e2c4bfaedc4057c3b22976757f9a2c845ba3124",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/4495c3351ccecb954a183e05b7220572fc591ce9",
+                "reference": "4495c3351ccecb954a183e05b7220572fc591ce9",
                 "shasum": ""
             },
             "require": {
@@ -199,8 +199,7 @@
                 "behat/mink-goutte-driver": "~1.2",
                 "mikey179/vfsstream": "^1.6",
                 "oleg-andreyev/mink-phpwebdriver": "^1.0",
-                "phpunit/dbunit": "4.0.*",
-                "phpunit/phpunit": "7.5.*",
+                "phpunit/phpunit": "8.5.*",
                 "symfony/process": "^4.0 || ^5.0"
             },
             "suggest": {
@@ -220,7 +219,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.9.13"
+                "source": "https://github.com/moodle/moodle/tree/v3.10.10"
             },
             "funding": [
                 {
@@ -231,7 +230,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-12T04:39:22+00:00"
+            "time": "2022-03-12T04:39:19+00:00"
         }
     ],
     "packages-dev": [],

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "691ce9717179c34ae3ad083360555cde",
+    "content-hash": "018d24876efe010990afd554b1e43658",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.10.10",
+            "version": "v3.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "4495c3351ccecb954a183e05b7220572fc591ce9"
+                "reference": "6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/4495c3351ccecb954a183e05b7220572fc591ce9",
-                "reference": "4495c3351ccecb954a183e05b7220572fc591ce9",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f",
+                "reference": "6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f",
                 "shasum": ""
             },
             "require": {
@@ -190,16 +190,16 @@
                 "ext-xmlreader": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
-                "php": ">=7.2.0 <8.0"
+                "php": ">=7.3.0 <8.1"
             },
             "require-dev": {
                 "behat/behat": "3.10.*",
                 "behat/mink": "~1.8",
-                "behat/mink-extension": "~2.3",
                 "behat/mink-goutte-driver": "~1.2",
+                "friends-of-behat/mink-extension": "dev-master",
                 "mikey179/vfsstream": "^1.6",
                 "oleg-andreyev/mink-phpwebdriver": "^1.0",
-                "phpunit/phpunit": "8.5.*",
+                "phpunit/phpunit": "9.5.*",
                 "symfony/process": "^4.0 || ^5.0"
             },
             "suggest": {
@@ -207,6 +207,7 @@
                 "ext-oci8": "Needed when Moodle uses Oracle database.",
                 "ext-pgsql": "Needed when Moodle uses PostgreSQL database.",
                 "ext-soap": "Enabling SOAP PHP extension is useful for web services and some plugins.",
+                "ext-sodium": "Enabling Sodium PHP extension is recommended, it is used by Moodle encryption API.",
                 "ext-sqlsrv": "Needed when Moodle uses MS SQL Server database.",
                 "ext-tokenizer": "Enabling Tokenizer PHP extension is recommended, it improves Moodle Networking functionality.",
                 "ext-xmlrpc": "Enabling XMLRPC PHP extension is useful for web services and Moodle networking."
@@ -219,7 +220,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.10.10"
+                "source": "https://github.com/moodle/moodle/tree/v3.11.6"
             },
             "funding": [
                 {
@@ -230,7 +231,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-12T04:39:19+00:00"
+            "time": "2022-03-12T04:39:27+00:00"
         }
     ],
     "packages-dev": [],

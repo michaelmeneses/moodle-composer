@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "018d24876efe010990afd554b1e43658",
+    "content-hash": "909c26adf2959cb3f9bf12a6121d8c47",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v3.11.6",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f"
+                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f",
-                "reference": "6d7dbaa6859da1e1c2d0f5ef64fe9d314dc54f3f",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/8b359ad7a63cf219110bca80552fe3d4ea2a635d",
+                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,7 @@
                 "ext-xmlreader": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
-                "php": ">=7.3.0 <8.1"
+                "php": ">=7.3.0"
             },
             "require-dev": {
                 "behat/behat": "3.10.*",
@@ -203,6 +203,7 @@
                 "symfony/process": "^4.0 || ^5.0"
             },
             "suggest": {
+                "ext-exif": "Enabling Exif PHP extension is recommended, it is used by Moodle to parse image meta data.",
                 "ext-mysqli": "Needed when Moodle uses MySQL or MariaDB database.",
                 "ext-oci8": "Needed when Moodle uses Oracle database.",
                 "ext-pgsql": "Needed when Moodle uses PostgreSQL database.",
@@ -220,7 +221,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v3.11.6"
+                "source": "https://github.com/moodle/moodle/tree/v4.0.0"
             },
             "funding": [
                 {
@@ -231,7 +232,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-12T04:39:27+00:00"
+            "time": "2022-04-17T06:59:54+00:00"
         }
     ],
     "packages-dev": [],

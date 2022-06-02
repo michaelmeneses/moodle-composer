@@ -18,7 +18,7 @@
   ],
   "require": {
     "composer/installers": "~1.0",
-    "moodle/moodle": "4.0.0"
+    "moodle/moodle": "4.0.1"
   },
   "extra": {
     "installerdir": "moodle",

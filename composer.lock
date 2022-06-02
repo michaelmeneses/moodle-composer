@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "909c26adf2959cb3f9bf12a6121d8c47",
+    "content-hash": "4581167d18839e7a2bdf3c79b489fc56",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodle/moodle.git",
-                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d"
+                "reference": "ac9e395ed6661fa76ba7e1d6a77e47631e88a9ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/8b359ad7a63cf219110bca80552fe3d4ea2a635d",
-                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d",
+                "url": "https://api.github.com/repos/moodle/moodle/zipball/ac9e395ed6661fa76ba7e1d6a77e47631e88a9ca",
+                "reference": "ac9e395ed6661fa76ba7e1d6a77e47631e88a9ca",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
             "description": "Moodle - the world's open source learning platform",
             "homepage": "https://moodle.org",
             "support": {
-                "source": "https://github.com/moodle/moodle/tree/v4.0.0"
+                "source": "https://github.com/moodle/moodle/tree/v4.0.1"
             },
             "funding": [
                 {
@@ -232,7 +232,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-04-17T06:59:54+00:00"
+            "time": "2022-05-07T11:34:54+00:00"
         }
     ],
     "packages-dev": [],
@@ -243,5 +243,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

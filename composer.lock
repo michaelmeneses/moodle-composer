@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "909c26adf2959cb3f9bf12a6121d8c47",
+    "content-hash": "7d825387946e37660e72f240105f7e1e",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,80 +159,16 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "v4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moodle/moodle.git",
-                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d"
-            },
+            "version": "4.1.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodle/moodle/zipball/8b359ad7a63cf219110bca80552fe3d4ea2a635d",
-                "reference": "8b359ad7a63cf219110bca80552fe3d4ea2a635d",
-                "shasum": ""
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-4.1.1.zip",
+                "shasum": "2179fd0f17c2541df0d310051d106d88a57c88a2"
             },
             "require": {
-                "ext-ctype": "*",
-                "ext-curl": "*",
-                "ext-dom": "*",
-                "ext-fileinfo": "*",
-                "ext-gd": "*",
-                "ext-hash": "*",
-                "ext-iconv": "*",
-                "ext-intl": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "ext-openssl": "*",
-                "ext-pcre": "*",
-                "ext-simplexml": "*",
-                "ext-spl": "*",
-                "ext-xml": "*",
-                "ext-xmlreader": "*",
-                "ext-zip": "*",
-                "ext-zlib": "*",
-                "php": ">=7.3.0"
+                "composer/installers": "*"
             },
-            "require-dev": {
-                "behat/behat": "3.10.*",
-                "behat/mink": "~1.8",
-                "behat/mink-goutte-driver": "~1.2",
-                "friends-of-behat/mink-extension": "dev-master",
-                "mikey179/vfsstream": "^1.6",
-                "oleg-andreyev/mink-phpwebdriver": "^1.0",
-                "phpunit/phpunit": "9.5.*",
-                "symfony/process": "^4.0 || ^5.0"
-            },
-            "suggest": {
-                "ext-exif": "Enabling Exif PHP extension is recommended, it is used by Moodle to parse image meta data.",
-                "ext-mysqli": "Needed when Moodle uses MySQL or MariaDB database.",
-                "ext-oci8": "Needed when Moodle uses Oracle database.",
-                "ext-pgsql": "Needed when Moodle uses PostgreSQL database.",
-                "ext-soap": "Enabling SOAP PHP extension is useful for web services and some plugins.",
-                "ext-sodium": "Enabling Sodium PHP extension is recommended, it is used by Moodle encryption API.",
-                "ext-sqlsrv": "Needed when Moodle uses MS SQL Server database.",
-                "ext-tokenizer": "Enabling Tokenizer PHP extension is recommended, it improves Moodle Networking functionality.",
-                "ext-xmlrpc": "Enabling XMLRPC PHP extension is useful for web services and Moodle networking."
-            },
-            "type": "project",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "description": "Moodle - the world's open source learning platform",
-            "homepage": "https://moodle.org",
-            "support": {
-                "source": "https://github.com/moodle/moodle/tree/v4.0.0"
-            },
-            "funding": [
-                {
-                    "type": "custom"
-                },
-                {
-                    "url": "https://moodle.com/donations/",
-                    "type": "custom"
-                }
-            ],
-            "time": "2022-04-17T06:59:54+00:00"
+            "type": "library"
         }
     ],
     "packages-dev": [],
@@ -243,5 +179,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

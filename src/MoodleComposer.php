@@ -6,6 +6,7 @@ use Composer\DependencyResolver\Operation\InstallOperation;
 use Composer\DependencyResolver\Operation\UninstallOperation;
 use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\Installer\PackageEvent;
+use Composer\Installers\MoodleInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
@@ -17,18 +18,21 @@ use Composer\Util\Filesystem;
  */
 class MoodleComposer
 {
+    // Constant for the default installer directory
+    const INSTALLER_DIR = 'moodle';
 
     /**
-     * preInstall
+     * Handles the pre-install event.
      *
-     * @param \Composer\Script\Event $event
+     * @param Event $event The Composer event object.
      */
     public static function preInstall(Event $event)
     {
         $io = $event->getIO();
         $io->write("------------ preInstall ------------");
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         // TODO required that folder no exists
         if (is_dir($installerdir) && file_exists($installerdir . "/version.php")) {
             throw new \Exception("Moodle is already installed in the folder: $installerdir.");
@@ -36,57 +40,61 @@ class MoodleComposer
     }
 
     /**
-     * postInstall
+     * Handles the post-install event.
      *
-     * @param \Composer\Script\Event $event
+     * @param Event $event The Composer event object.
      */
     public static function postInstall(Event $event)
     {
         $io = $event->getIO();
         $io->write("------------ postInstall ------------");
+
         // TODO resolve need move or copy Moodle
         self::moveMoodle($event);
         self::copyConfig($event);
     }
 
     /**
-     * preUpdate
+     * Handles the pre-update event.
      *
-     * @param \Composer\Script\Event $event
+     * @param Event $event The Composer event object.
      */
     public static function preUpdate(Event $event)
     {
         $io = $event->getIO();
         $io->write("------------ preUpdate ------------");
+
         self::copyConfigToRoot($event);
     }
 
     /**
-     * postUpdate
+     * Handles the post-update event.
      *
-     * @param \Composer\Script\Event $event
+     * @param Event $event The Composer event object.
      */
     public static function postUpdate(Event $event)
     {
         $io = $event->getIO();
         $io->write("------------ postUpdate ------------");
+
+        $installerdir = self::getInstallerDir($event);
+
         if (self::isNewMoodle($event)) {
             self::removeMoodle($event);
             self::moveMoodle($event);
             self::copyConfig($event);
             $io->write("<warning>DANGER! Run 'composer update' to reinstall plugins.</warning>");
         }
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
         if (file_exists("$installerdir/config.php")) {
             self::cleanCache($event);
         }
     }
 
     /**
-     * preUpdatePackage
+     * Handles the pre-update-package event.
      *
-     * @param \Composer\Script\Event $event
+     * @param PackageEvent $event The Composer package event object.
      */
     public static function preUpdatePackage(PackageEvent $event)
     {
@@ -101,16 +109,47 @@ class MoodleComposer
     }
 
     /**
-     * postPackage
+     * Handles the post-package event.
      *
-     * @param \Composer\Script\Event $event
+     * @param PackageEvent $event The Composer package event object.
      */
     public static function postPackage(PackageEvent $event)
     {
         $io = $event->getIO();
         $io->write("------------ postPackage ------------");
 
+        $installerdir = self::getInstallerDir($event);
+
         $package = self::getPackage($event);
+
+        if (!self::isMoodle($package)) {
+            $packageType = $package->getType();
+            if (str_starts_with($packageType, 'moodle-')) {
+                if (!self::existsInstallerPath($event, $packageType)) {
+                    $pluginType = str_replace('moodle-', '', $packageType);
+
+                    $moodleInstaller = new MoodleInstaller();
+                    $locations = $moodleInstaller->getLocations();
+                    if (isset($locations[$pluginType])) {
+                        $appDir = getcwd();
+                        $path = $event->getComposer()->getInstallationManager()->getInstallPath($package);
+                        $currentPath = $appDir . DIRECTORY_SEPARATOR . $path;
+                        $newPath = $appDir . DIRECTORY_SEPARATOR . $installerdir . '/' . $path;
+
+                        $filesystem = new Filesystem();
+                        $filesystem->copyThenRemove($currentPath, $newPath);
+
+                        while ($currentPath !== $appDir) {
+                            $filesystem->removeDirectory($currentPath);
+                            $paths = explode(DIRECTORY_SEPARATOR, $currentPath);
+                            array_pop($paths);
+                            $currentPath = implode(DIRECTORY_SEPARATOR, $paths);
+                        }
+                    }
+                }
+            }
+        }
+
         if (isset($package) && $package instanceof PackageInterface) {
             $installationManager = $event->getComposer()->getInstallationManager();
             $path = $installationManager->getInstallPath($package);
@@ -123,9 +162,10 @@ class MoodleComposer
     }
 
     /**
-     * getPackage
+     * Retrieves the package associated with the Composer event.
      *
-     * @param \Composer\Script\Event $event
+     * @param PackageEvent $event The Composer package event object.
+     * @return PackageInterface|null The package associated with the event.
      */
     public static function getPackage(PackageEvent $event)
     {
@@ -145,14 +185,17 @@ class MoodleComposer
     /**
      * copyConfigToRoot
      *
-     * @param \Composer\Script\Event $event
+     * Copies the "config.php" file from the installation directory to the root directory.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
      */
     public static function copyConfigToRoot(Event $event)
     {
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         if (file_exists("$installerdir/config.php")) {
             $io->write("Copying $installerdir/config.php to ROOT/");
             if (!copy("$appDir/$installerdir/config.php", "$appDir/config.php")) {
@@ -166,14 +209,17 @@ class MoodleComposer
     /**
      * moveMoodle
      *
-     * @param \Composer\Script\Event $event
+     * Copies the "vendor/moodle/moodle" directory to the installation directory.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
      */
     public static function moveMoodle(Event $event)
     {
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         $filesystem = new Filesystem();
         $io->write("Copying vendor/moodle/moodle to $installerdir/");
         $filesystem->copyThenRemove($appDir . "/vendor/moodle/moodle", $appDir . DIRECTORY_SEPARATOR . $installerdir);
@@ -182,13 +228,16 @@ class MoodleComposer
     /**
      * removeMoodle
      *
-     * @param \Composer\Script\Event $event
+     * Removes the Moodle installation directory.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
      */
     public static function removeMoodle(Event $event)
     {
         $io = $event->getIO();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         if (is_dir($installerdir)) {
             $io->write("Removing $installerdir/");
             self::deleteRecursive($installerdir);
@@ -198,14 +247,17 @@ class MoodleComposer
     /**
      * copyConfig
      *
-     * @param \Composer\Script\Event $event
+     * Copies the "config.php" file from the root directory to the installation directory.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
      */
     public static function copyConfig(Event $event)
     {
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         if (file_exists('config.php')) {
             $io->write("Copying config.php to $installerdir/");
             if (!copy("$appDir/config.php", "$appDir/$installerdir/config.php")) {
@@ -217,15 +269,18 @@ class MoodleComposer
     /**
      * setMaintenance
      *
-     * @param \Composer\Script\Event $event
-     * @param boolean $status
+     * Enables or disables Moodle maintenance mode.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
+     * @param boolean $status Indicates whether maintenance mode should be enabled (true) or disabled (false). Default is false.
      */
     public static function setMaintenance(Event $event, $status = false)
     {
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         if ($status) {
             $io->write("Enabling Maintenance Mode");
             exec("php $appDir/$installerdir/admin/cli/maintenance.php --enable");
@@ -238,15 +293,17 @@ class MoodleComposer
     /**
      * cleanCache
      *
-     * @param \Composer\Script\Event $event
-     * @param boolean $status
+     * Clears the Moodle cache.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
      */
     public static function cleanCache(Event $event)
     {
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
+
         $io->write("Clearing the Moodle cache");
         exec("php $appDir/$installerdir/admin/cli/purge_caches.php");
     }
@@ -254,8 +311,10 @@ class MoodleComposer
     /**
      * isNewMoodle
      *
-     * @param \Composer\Script\Event $event
-     * @param boolean $status
+     * Checks if a new Moodle version is detected.
+     *
+     * @param \Composer\Script\Event $event The Composer event.
+     * @return boolean Returns true if a new Moodle version is detected, false otherwise.
      */
     public static function isNewMoodle(Event $event)
     {
@@ -268,8 +327,8 @@ class MoodleComposer
 
         $io = $event->getIO();
         $appDir = getcwd();
-        $extra = $event->getComposer()->getPackage()->getExtra();
-        $installerdir = $extra['installerdir'];
+
+        $installerdir = self::getInstallerDir($event);
 
         $oldVersion = 0;
         $newVersion = 0;
@@ -295,7 +354,7 @@ class MoodleComposer
         }
 
         if ($newVersion > $oldVersion) {
-            $io->write("### NEW MOODLE DETECTED VERSION ###");
+            $io->write("### NEW MOODLE VERSION DETECTED ###");
             return true;
         }
 
@@ -304,6 +363,11 @@ class MoodleComposer
 
     /**
      * deleteRecursive
+     *
+     * Recursively deletes a file or directory.
+     *
+     * @param string $path The path to the file or directory to delete.
+     * @return boolean Returns true on success, false on failure.
      */
     public static function deleteRecursive($path)
     {
@@ -323,4 +387,42 @@ class MoodleComposer
         return rmdir($path) && $success;
     }
 
+    /**
+     * Retrieves the installer directory from composer.json's extra configuration.
+     *
+     * @param Event|PackageEvent $event The Composer event object.
+     * @return string The installer directory.
+     */
+    public static function getInstallerDir($event)
+    {
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        return $extra['installerdir'] ?? self::INSTALLER_DIR;
+    }
+
+    /**
+     * Checks if an installer path exists for a given package type.
+     *
+     * @param Event|PackageEvent $event The Composer event object.
+     * @param string $packageType The package type to check.
+     * @return bool True if the installer path exists, false otherwise.
+     */
+    public static function existsInstallerPath($event, $packageType)
+    {
+        $extra = $event->getComposer()->getPackage()->getExtra();
+        return isset($extra['installer-paths'][$packageType]);
+    }
+
+    /**
+     * Checks if a given package is Moodle.
+     *
+     * @param PackageInterface $package The package to check.
+     * @return bool True if the package is Moodle, false otherwise.
+     */
+    public static function isMoodle($package)
+    {
+        if ($package->getName() === 'moodle/moodle') {
+            return true;
+        }
+        return false;
+    }
 }

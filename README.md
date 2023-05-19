@@ -8,7 +8,7 @@ Manage Moodle LMS and plugins using Composer at a root directory level (example 
 
 ### Install (only first time)
 ```
-git clone https://github.com/michaelmeneses/moodle-composer.git myproject  
+git clone https://github.com/michaelmeneses/moodle-composer.git myproject  
 cd myproject  
 composer install
 ```
@@ -22,7 +22,7 @@ _Edit composer.json_
 
 Add require
 ```
-"markn86/moodle-mod_customcert": "dev-MOODLE_33_STABLE"  
+"markn86/moodle-mod_customcert": "dev-MOODLE_400_STABLE"  
 ```
 
 #### Another source  
@@ -31,15 +31,15 @@ _Edit composer.json_
 
 Add repository
 ```
-{  
+{  
   "type": "vcs",  
   "url": "https://github.com/markn86/moodle-mod_customcert.git"  
-}  
+}  
 ```
 
 Add require (**The plugin should contain composer.json file with type set to "moodle-_type_"**)
 ```
-"markn86/moodle-mod_customcert": "dev-MOODLE_33_STABLE"  
+"markn86/moodle-mod_customcert": "dev-MOODLE_400_STABLE"  
 ```
 
 #### Update
@@ -52,7 +52,7 @@ composer update
 #### Remove entry in require
 _Edit composer.json_
 ```
-"drachels/moodle-mod_hotquestion": "dev-MOODLE_33_STABLE"  
+"middag/moodle-theme_middag": "*"  
 ```
 #### Update
 ```
@@ -65,11 +65,7 @@ composer update
 ### Set new version
 **Edit composer.json**
 ```
-"moodle/moodle": "dev-MOODLE_33_STABLE"  
-```
-or  
-```
-"moodle/moodle": "dev-v3.3.0"  
+"moodle/moodle": "4.1.*"  
 ```
 
 ### Update  

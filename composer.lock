@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d825387946e37660e72f240105f7e1e",
+    "content-hash": "c6120c13b54209a744ca905af36ac7e3",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,11 +159,11 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "4.1.1",
+            "version": "4.1.2",
             "dist": {
                 "type": "zip",
-                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-4.1.1.zip",
-                "shasum": "2179fd0f17c2541df0d310051d106d88a57c88a2"
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-4.1.2.zip",
+                "shasum": "f64331787b7f587208411c3acecf35388de2ba63"
             },
             "require": {
                 "composer/installers": "*"

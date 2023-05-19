@@ -21,7 +21,7 @@
   ],
   "require": {
     "composer/installers": "~1.0",
-    "moodle/moodle": "4.1.*"
+    "moodle/moodle": "4.2.*"
   },
   "autoload": {
     "psr-4": {

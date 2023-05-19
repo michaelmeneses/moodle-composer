@@ -136,14 +136,22 @@ class MoodleComposer
                         $currentPath = $appDir . DIRECTORY_SEPARATOR . $path;
                         $newPath = $appDir . DIRECTORY_SEPARATOR . $installerdir . '/' . $path;
 
-                        $filesystem = new Filesystem();
-                        $filesystem->copyThenRemove($currentPath, $newPath);
+                        try {
+                            $filesystem = new Filesystem();
+                            $filesystem->copyThenRemove($currentPath, $newPath);
 
-                        while ($currentPath !== $appDir) {
-                            $filesystem->removeDirectory($currentPath);
-                            $paths = explode(DIRECTORY_SEPARATOR, $currentPath);
-                            array_pop($paths);
-                            $currentPath = implode(DIRECTORY_SEPARATOR, $paths);
+                            while ($currentPath !== $appDir) {
+                                if (is_dir($currentPath)) {
+                                    if (count(scandir($currentPath)) == 2) {
+                                        rmdir($currentPath);
+                                    }
+                                }
+                                $paths = explode(DIRECTORY_SEPARATOR, $currentPath);
+                                array_pop($paths);
+                                $currentPath = implode(DIRECTORY_SEPARATOR, $paths);
+                            }
+                        } catch (\Exception $exception) {
+                            $io->error($exception->getMessage());
                         }
                     }
                 }

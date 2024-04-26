@@ -21,6 +21,7 @@
   ],
   "require": {
     "composer/installers": "~1.0",
+    "vlucas/phpdotenv": "^5.6",
     "moodle/moodle": "4.1.*"
   },
   "autoload": {
@@ -29,15 +30,23 @@
     }
   },
   "scripts": {
-    "pre-package-update": "Middag\\MoodleComposer::preUpdatePackage",
-    "post-package-update": "Middag\\MoodleComposer::postPackage",
-    "post-package-install": "Middag\\MoodleComposer::postPackage",
+    "pre-install-cmd": "Middag\\MoodleComposer::preInstall",
+    "post-install-cmd": "Middag\\MoodleComposer::postInstall",
     "pre-update-cmd": "Middag\\MoodleComposer::preUpdate",
     "post-update-cmd": "Middag\\MoodleComposer::postUpdate",
-    "post-install-cmd": "Middag\\MoodleComposer::postInstall",
-    "pre-install-cmd": "Middag\\MoodleComposer::preInstall"
+    "post-package-install": "Middag\\MoodleComposer::postPackage",
+    "pre-package-update": "Middag\\MoodleComposer::preUpdatePackage",
+    "post-package-update": "Middag\\MoodleComposer::postPackage",
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "@php -r \"file_exists('config.php') || copy('config.example.php', 'config.example.php');\""
+    ]
   },
   "config": {
+    "moodle-composer": {
+      "copy-config": true,
+      "clear-cache": true
+    },
     "preferred-install": {
       "moodle/moodle": "dist"
     },

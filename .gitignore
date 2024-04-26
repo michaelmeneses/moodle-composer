@@ -4,3 +4,5 @@
 /.idea/
 /moodledata/
 /version.php
+.env*
+!.env.example

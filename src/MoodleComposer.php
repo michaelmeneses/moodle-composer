@@ -136,14 +136,22 @@ class MoodleComposer
                         $currentPath = $appDir . DIRECTORY_SEPARATOR . $path;
                         $newPath = $appDir . DIRECTORY_SEPARATOR . $installerdir . '/' . $path;
 
-                        $filesystem = new Filesystem();
-                        $filesystem->copyThenRemove($currentPath, $newPath);
+                        try {
+                            $filesystem = new Filesystem();
+                            $filesystem->copyThenRemove($currentPath, $newPath);
 
-                        while ($currentPath !== $appDir) {
-                            $filesystem->removeDirectory($currentPath);
-                            $paths = explode(DIRECTORY_SEPARATOR, $currentPath);
-                            array_pop($paths);
-                            $currentPath = implode(DIRECTORY_SEPARATOR, $paths);
+                            while ($currentPath !== $appDir) {
+                                if (is_dir($currentPath)) {
+                                    if (count(scandir($currentPath)) == 2) {
+                                        rmdir($currentPath);
+                                    }
+                                }
+                                $paths = explode(DIRECTORY_SEPARATOR, $currentPath);
+                                array_pop($paths);
+                                $currentPath = implode(DIRECTORY_SEPARATOR, $paths);
+                            }
+                        } catch (\Exception $exception) {
+                            $io->error($exception->getMessage());
                         }
                     }
                 }
@@ -191,6 +199,10 @@ class MoodleComposer
      */
     public static function copyConfigToRoot(Event $event)
     {
+        if (!self::canCopyConfig($event)) {
+            return;
+        }
+
         $io = $event->getIO();
         $appDir = getcwd();
 
@@ -253,6 +265,10 @@ class MoodleComposer
      */
     public static function copyConfig(Event $event)
     {
+        if (!self::canCopyConfig($event)) {
+            return;
+        }
+
         $io = $event->getIO();
         $appDir = getcwd();
 
@@ -299,6 +315,10 @@ class MoodleComposer
      */
     public static function cleanCache(Event $event)
     {
+        if (!self::canCopyConfig($event)) {
+            return;
+        }
+
         $io = $event->getIO();
         $appDir = getcwd();
 
@@ -424,5 +444,37 @@ class MoodleComposer
             return true;
         }
         return false;
+    }
+
+    /**
+     * canCopyConfig
+     *
+     * @param \Composer\Script\Event $event The Composer event.
+     */
+    public static function canCopyConfig(Event $event)
+    {
+        $thisConfig = $event->getComposer()->getConfig()->get('moodle-composer');
+
+        if (isset($thisConfig['copy-config']) && $thisConfig['copy-config'] === false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * canClearCache
+     *
+     * @param \Composer\Script\Event $event The Composer event.
+     */
+    public static function canClearCache(Event $event)
+    {
+        $thisConfig = $event->getComposer()->getConfig()->get('moodle-composer');
+
+        if (isset($thisConfig['clear-cache']) && $thisConfig['clear-cache'] === false) {
+            return false;
+        }
+
+        return true;
     }
 }

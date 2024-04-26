@@ -37,9 +37,9 @@
     "post-package-install": "Middag\\MoodleComposer::postPackage",
     "pre-package-update": "Middag\\MoodleComposer::preUpdatePackage",
     "post-package-update": "Middag\\MoodleComposer::postPackage",
-    "post-root-package-install": [
+    "pre-autoload-dump": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-      "@php -r \"file_exists('config.php') || copy('config.example.php', 'config.example.php');\""
+      "@php -r \"file_exists('config.php') || copy('config.example.php', 'config.php');\""
     ]
   },
   "config": {

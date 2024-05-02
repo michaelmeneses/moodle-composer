@@ -4,7 +4,11 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
-// Import moodlecomposer-util.php
+/**
+ * MOODLE COMPOSER
+ *
+ * Import moodlecomposer-util.php
+ */
 require_once(__DIR__ . '/../moodlecomposer-util.php');
 
 //=========================================================================
@@ -33,6 +37,17 @@ $CFG->wwwroot   = moodlecomposer_get_env('MOODLE_WWWROOT');
 // 3. DATA FILES LOCATION
 //=========================================================================
 $CFG->dataroot  = moodlecomposer_get_env('MOODLE_DATAROOT');
+
+/**
+ * MOODLE COMPOSER
+ *
+ * Import moodlecomposer-configextras.php (if exists)
+ */
+$moodlecomposer_configextras = __DIR__ . '/../moodlecomposer-configextras.php';
+if (file_exists($moodlecomposer_configextras)) {
+    require_once($moodlecomposer_configextras);
+}
+unset($moodlecomposer_configextras);
 
 require_once(__DIR__ . '/lib/setup.php');
 

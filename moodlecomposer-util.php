@@ -13,7 +13,9 @@ function moodlecomposer_get_env($varname, $default = null)
         if (isset($_ENV[$varname])) {
             return $_ENV[$varname];
         }
-        return getenv($varname);
+        if (getenv($varname)) {
+            return getenv($varname);
+        }
     }
 
     if (isset($_ENV[$varname])) {

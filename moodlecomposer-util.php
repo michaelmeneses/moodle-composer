@@ -4,8 +4,13 @@ global $CFG;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+try {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+    die;
+}
 
 function moodlecomposer_get_env($varname, $default = null)
 {

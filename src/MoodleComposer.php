@@ -19,6 +19,7 @@ use Composer\Util\Filesystem;
 class MoodleComposer
 {
     // Constant for the default installer directory
+    const FRAMEWORK_TYPE = 'moodle';
     const INSTALLER_DIR = 'moodle';
 
     /**
@@ -128,13 +129,26 @@ class MoodleComposer
                 if (!self::existsInstallerPath($event, $packageType)) {
                     $pluginType = str_replace('moodle-', '', $packageType);
 
-                    $moodleInstaller = new MoodleInstaller();
-                    $locations = $moodleInstaller->getLocations();
+                    try {
+                        $moodleInstaller = new MoodleInstaller();
+                        $locations = $moodleInstaller->getLocations();
+                    } catch (\ArgumentCountError $exception) {
+                        $moodleInstaller = new MoodleInstaller($package, $event->getComposer(), $io);
+                        $locations = $moodleInstaller->getLocations(self::FRAMEWORK_TYPE);
+                    } catch (\Exception $exception) {
+                        throw $exception;
+                    }
+
                     if (isset($locations[$pluginType])) {
                         $appDir = getcwd();
                         $path = $event->getComposer()->getInstallationManager()->getInstallPath($package);
+
+                        if (strpos($path, $appDir) === 0) {
+                            $path = str_replace($appDir . DIRECTORY_SEPARATOR, '', $path);
+                        }
+
                         $currentPath = $appDir . DIRECTORY_SEPARATOR . $path;
-                        $newPath = $appDir . DIRECTORY_SEPARATOR . $installerdir . '/' . $path;
+                        $newPath = $appDir . DIRECTORY_SEPARATOR . $installerdir . DIRECTORY_SEPARATOR . $path;
 
                         try {
                             $filesystem = new Filesystem();
@@ -400,7 +414,7 @@ class MoodleComposer
             if ($entry == '.' || $entry == '..') {
                 continue;
             }
-            $entry_path = $path . '/' . $entry;
+            $entry_path = $path . DIRECTORY_SEPARATOR . $entry;
             $success = static::deleteRecursive($entry_path) && $success;
         }
         $dir->close();

@@ -21,6 +21,7 @@ class MoodleComposer
     // Constant for the default installer directory
     const FRAMEWORK_TYPE = 'moodle';
     const INSTALLER_DIR = 'moodle';
+    const LOCAL_PLUGINS_DIR = 'local_plugins';
 
     /**
      * Handles the pre-install event.
@@ -53,6 +54,7 @@ class MoodleComposer
         // TODO resolve need move or copy Moodle
         self::moveMoodle($event);
         self::copyConfig($event);
+        self::symlinkLocalPlugins($event);
     }
 
     /**
@@ -87,8 +89,13 @@ class MoodleComposer
             $io->write("<warning>DANGER! Run 'composer update' to reinstall plugins.</warning>");
         }
 
+        self::symlinkLocalPlugins($event);
+
+
         if (file_exists("$installerdir/config.php")) {
-            self::cleanCache($event);
+            if (self::canClearCache($event)) {
+                self::cleanCache($event);
+            }
         }
     }
 
@@ -490,5 +497,125 @@ class MoodleComposer
         }
 
         return true;
+    }
+
+    /**
+     * Symlinks plugins from the local_plugins directory into the Moodle installation.
+     *
+     * Assumes a structure like:
+     * /local_plugins/
+     *   local/
+     *     myplugin1/
+     *     myplugin2/
+     *   mod/
+     *     mymod/
+     *   theme/
+     *     mytheme/
+     *
+     * @param Event $event The Composer event object.
+     */
+    public static function symlinkLocalPlugins(Event $event)
+    {
+        $io = $event->getIO();
+        $appDir = getcwd();
+        $installerdir = self::getInstallerDir($event);
+        $filesystem = new Filesystem();
+
+        $localPluginsBase = $appDir . DIRECTORY_SEPARATOR . self::LOCAL_PLUGINS_DIR;
+        $moodleTargetPath = $appDir . DIRECTORY_SEPARATOR . $installerdir;
+
+        if (!is_dir($localPluginsBase)) {
+            $io->write("Local plugins directory not found: " . self::LOCAL_PLUGINS_DIR . " - Skipping symlinking.");
+            return;
+        }
+
+        $io->write("Symlinking local plugins from " . self::LOCAL_PLUGINS_DIR . " into $installerdir");
+
+        $pluginTypes = @scandir($localPluginsBase);
+        if ($pluginTypes === false) {
+            $io->error("Could not scan directory: $localPluginsBase");
+            return;
+        }
+
+
+        foreach ($pluginTypes as $pluginType) {
+            if ($pluginType === '.' || $pluginType === '..') {
+                continue;
+            }
+
+            $typeSourcePath = $localPluginsBase . DIRECTORY_SEPARATOR . $pluginType;
+            $typeTargetPath = $moodleTargetPath . DIRECTORY_SEPARATOR . $pluginType;
+
+            if (!is_dir($typeSourcePath)) {
+                // Silently skip files at the root of local_plugins (like .DS_Store)
+                continue;
+            }
+
+            $io->write("  Processing plugin type: $pluginType");
+
+            $plugins = @scandir($typeSourcePath);
+            if ($plugins === false) {
+                $io->error("  Could not scan directory: $typeSourcePath");
+                continue;
+            }
+
+            foreach ($plugins as $pluginName) {
+                if ($pluginName === '.' || $pluginName === '..') {
+                    continue;
+                }
+
+                $source = $typeSourcePath . DIRECTORY_SEPARATOR . $pluginName; // Absolute source path
+                $linkPath = $typeTargetPath . DIRECTORY_SEPARATOR . $pluginName; // Absolute link path
+
+                // *** ADDED CHECK: Only link directories ***
+                if (!is_dir($source)) {
+                    $io->write("    - Skipping non-directory: $pluginName");
+                    continue;
+                }
+                // *******************************************
+
+                // Ensure the parent directory for the link exists
+                try {
+                    $filesystem->ensureDirectoryExists($typeTargetPath);
+                } catch (\RuntimeException $e) {
+                    $io->error("  - FAILED to create directory $typeTargetPath: " . $e->getMessage());
+                    continue 2; // Skip processing the rest of this plugin type
+                }
+
+
+                // Check if something exists at the target path and remove it
+                // This is important because moveMoodle might leave old symlinks if run multiple times without removeMoodle
+                if (is_link($linkPath) || file_exists($linkPath)) {
+                    $io->write("    - Removing existing file/link at: $linkPath");
+                    if (!self::deleteRecursive($linkPath)) {
+                        $io->error("    - FAILED to remove existing item at $linkPath");
+                        continue; // Skip this plugin if removal fails
+                    }
+                }
+
+                // Create the symlink (target, link)
+                // Use relative path for the target if possible, fallback to absolute
+                // This makes the setup slightly more portable if the whole project moves
+                $relativePathSource = $filesystem->findShortestPath($typeTargetPath, $source, true);
+                $io->write("    - Linking $pluginName from $relativePathSource to $linkPath");
+
+                if (symlink($relativePathSource, $linkPath)) {
+                    $io->write("    - SUCCESS (Relative link)");
+                } else {
+                    // Try absolute path as fallback
+                    $io->warning("    - Relative symlink failed, trying absolute path...");
+                    if (symlink($source, $linkPath)) {
+                        $io->write("    - SUCCESS (Absolute link)");
+                    } else {
+                        $io->error("    - FAILED to create symlink (absolute path attempt).");
+                        // Provide more context for potential errors (e.g., permissions on Windows)
+                        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                            $io->warning("      Symlinking on Windows often requires Administrator privileges or Developer Mode enabled.");
+                        }
+                    }
+                }
+            }
+        }
+        $io->write("Finished symlinking local plugins.");
     }
 }

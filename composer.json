@@ -22,7 +22,7 @@
   "require": {
     "composer/installers": "~1.0",
     "vlucas/phpdotenv": "^5.6",
-    "moodle/moodle": "4.4.*"
+    "moodle/moodle": "5.0.*"
   },
   "autoload": {
     "psr-4": {

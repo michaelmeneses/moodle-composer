@@ -221,11 +221,11 @@
         },
         {
             "name": "moodle/moodle",
-            "version": "5.0.0",
+            "version": "5.0.3",
             "dist": {
                 "type": "zip",
-                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-5.0.0.zip",
-                "shasum": "3103d5bedcecba60de73eb191f8f9eb50b1dbacd"
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-5.0.3.zip",
+                "shasum": "3080afbadf1aa49e651dbe3fa4d5e38487f17acf"
             },
             "require": {
                 "composer/installers": "*"

@@ -6,7 +6,7 @@
     "composer"
   ],
   "license": "GPL-3.0",
-  "type": "composer-plugin",
+  "type": "library",
   "authors": [
     {
       "name": "Michael Meneses",

@@ -6,7 +6,7 @@ use Composer\DependencyResolver\Operation\InstallOperation;
 use Composer\DependencyResolver\Operation\UninstallOperation;
 use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\Installer\PackageEvent;
-use Composer\Installers\MoodleInstaller;
+use Moodle\Composer\MoodleInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
@@ -129,15 +129,12 @@ class MoodleComposer
                 if (!self::existsInstallerPath($event, $packageType)) {
                     $pluginType = str_replace('moodle-', '', $packageType);
 
-                    try {
-                        $moodleInstaller = new MoodleInstaller();
-                        $locations = $moodleInstaller->getLocations();
-                    } catch (\ArgumentCountError $exception) {
-                        $moodleInstaller = new MoodleInstaller($package, $event->getComposer(), $io);
-                        $locations = $moodleInstaller->getLocations(self::FRAMEWORK_TYPE);
-                    } catch (\Exception $exception) {
-                        throw $exception;
-                    }
+                    $moodleInstaller = new MoodleInstaller(
+                        $io,
+                        $event->getComposer(),
+                        self::FRAMEWORK_TYPE
+                    );
+                    $locations = $moodleInstaller->getLocations();
 
                     if (isset($locations[$pluginType])) {
                         $appDir = getcwd();

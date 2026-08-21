@@ -23,7 +23,7 @@
     "composer-plugin-api": "^2.0",
     "moodle/composer-installer": "^1.2",
     "vlucas/phpdotenv": "^5.6",
-    "moodle/moodle": "5.1.*"
+    "moodle/moodle": "5.2.*"
   },
   "autoload": {
     "psr-4": {

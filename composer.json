@@ -20,7 +20,8 @@
     }
   ],
   "require": {
-    "composer/installers": "~1.0",
+    "composer-plugin-api": "^2.0",
+    "moodle/composer-installer": "^1.2",
     "vlucas/phpdotenv": "^5.6",
     "moodle/moodle": "5.1.*"
   },
@@ -52,7 +53,7 @@
     },
     "discard-changes": true,
     "allow-plugins": {
-      "composer/installers": true
+      "moodle/composer-installer": true
     }
   }
 }

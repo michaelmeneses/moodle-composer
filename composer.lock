@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4144fe9bf9393426395d3a016aed0e58",
+    "content-hash": "9900fb687177fac8b0823ef5ce425b44",
     "packages": [
         {
             "name": "composer/installers",
@@ -220,12 +220,64 @@
             "time": "2024-07-20T21:45:45+00:00"
         },
         {
-            "name": "moodle/moodle",
-            "version": "5.1.0",
+            "name": "moodle/composer-installer",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moodle/composer-installer.git",
+                "reference": "c83ad89ffa7de01dadb8bddc957bae19d6bffc51"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-5.1.0.zip",
-                "shasum": "dfcbf73f7d5deb3cdf5529baa84bb90fcc9b9267"
+                "url": "https://api.github.com/repos/moodle/composer-installer/zipball/c83ad89ffa7de01dadb8bddc957bae19d6bffc51",
+                "reference": "c83ad89ffa7de01dadb8bddc957bae19d6bffc51",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "composer-runtime-api": "^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.7.8",
+                "composer/semver": "^3.4.4",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-phpunit": "^2",
+                "phpunit/phpunit": "^9.6.20"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Moodle\\Composer\\Plugin",
+                "plugin-modifies-install-path": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Moodle\\Composer\\": "src/Composer"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "A Composer Installer Plugin for Moodle",
+            "keywords": [
+                "composer",
+                "installer",
+                "moodle"
+            ],
+            "support": {
+                "issues": "https://github.com/moodle/composer-installer/issues",
+                "source": "https://github.com/moodle/composer-installer/tree/v1.2.2"
+            },
+            "time": "2026-02-17T04:49:54+00:00"
+        },
+        {
+            "name": "moodle/moodle",
+            "version": "5.3.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://satis.middag.com.br/dist/moodle/moodle/moodle-moodle-5.3.0.zip",
+                "shasum": "11cb4a929fe07bf5aff293562859d7df013b4605"
             },
             "require": {
                 "composer/installers": "*"
@@ -647,10 +699,12 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform": {
+        "composer-plugin-api": "^2.0"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

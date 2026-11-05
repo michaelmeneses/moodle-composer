@@ -30,6 +30,9 @@
       "Middag\\": "src"
     }
   },
+  "extra": {
+    "haspublicdir": true
+  },
   "scripts": {
     "pre-install-cmd": "Middag\\MoodleComposer::preInstall",
     "post-install-cmd": "Middag\\MoodleComposer::postInstall",

@@ -56,7 +56,8 @@
     },
     "discard-changes": true,
     "allow-plugins": {
-      "moodle/composer-installer": true
+      "moodle/composer-installer": true,
+      "composer/installers": false
     }
   }
 }

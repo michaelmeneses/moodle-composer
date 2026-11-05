@@ -6,7 +6,7 @@
     "composer"
   ],
   "license": "GPL-3.0",
-  "type": "composer-plugin",
+  "type": "library",
   "authors": [
     {
       "name": "Michael Meneses",
@@ -23,12 +23,15 @@
     "composer-plugin-api": "^2.0",
     "moodle/composer-installer": "^1.2",
     "vlucas/phpdotenv": "^5.6",
-    "moodle/moodle": "5.2.*"
+    "moodle/moodle": "5.3.*"
   },
   "autoload": {
     "psr-4": {
       "Middag\\": "src"
     }
+  },
+  "extra": {
+    "haspublicdir": true
   },
   "scripts": {
     "pre-install-cmd": "Middag\\MoodleComposer::preInstall",
@@ -53,7 +56,8 @@
     },
     "discard-changes": true,
     "allow-plugins": {
-      "moodle/composer-installer": true
+      "moodle/composer-installer": true,
+      "composer/installers": false
     }
   }
 }
